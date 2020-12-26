@@ -1,0 +1,31 @@
+extends Character
+
+var inputs = {
+	"ui_right": Vector2.RIGHT,
+	"ui_left": Vector2.LEFT,
+	"ui_up": Vector2.UP,
+	"ui_down": Vector2.DOWN,
+}
+
+func _ready():
+	$RayCast2D.set_collide_with_areas(true)
+	
+func _unhandled_input(event):
+	for dir in inputs.keys():
+		if event.is_action_pressed(dir):
+			move(inputs[dir])
+
+func is_moveable_to(dir):
+	self.ray.cast_to = dir * tile_size
+	self.ray.force_raycast_update()
+	var collider = ray.get_collider()
+	if !collider:
+		return true
+	elif collider.has_method("is_moveable_to"):
+		if collider.is_moveable_to(dir):
+			collider.move(dir)
+			return true
+		else:
+			return false
+	else:
+		return false
