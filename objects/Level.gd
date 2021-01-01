@@ -83,7 +83,12 @@ func _setup_ground():
 		add_child(_create_ground_tile(ground * tile_size))
 	for wall in level_info.walls:
 		add_child(_create_ground_tile(wall * tile_size))
-		
+	for goal in level_info.goals:
+		add_child(_create_ground_tile(goal * tile_size))
+	for crate in level_info.crates:
+		add_child(_create_ground_tile(crate * tile_size))
+	add_child(_create_ground_tile(level_info.player * tile_size))
+
 func _create_ground_tile(position):
 	var ch = Character.new()
 	var sprite = Sprite.new()
@@ -94,6 +99,19 @@ func _create_ground_tile(position):
 	
 func _on_Crate_entered_Goal(area):
 	self.crates_on_goal += 1
+	if self.crates_on_goal == len(self.goals):
+		# To avoid a case when a crate is moving from goal to goal and conidered
+		# as scoring 2 goals, the game will check again the end condition when timer
+		# expires and movement has setteled
+		var timer = Timer.new()
+		timer.one_shot = true
+		timer.autostart = true
+		timer.wait_time = 0.1
+		add_child(timer)
+		timer.connect("timeout", self, "_on_Timeout_level_ended_check")
+		#emit_signal("level_completed")
+
+func _on_Timeout_level_ended_check():
 	if self.crates_on_goal == len(self.goals):
 		emit_signal("level_completed")
 
