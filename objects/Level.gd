@@ -27,9 +27,23 @@ const goal_scene = preload("res://objects/Landing.tscn")
 
 const ground_texture = preload("res://assets/PNG/Ground/ground_01.png")
 
+var width: int
+var height: int
+
 func initialize(level_info: LevelInfo):
 	self.level_info = level_info
 	_setup_objects()
+	_calc_level_size()
+
+func _calc_level_size():
+	var max_size = Vector2(0, 0)
+	for wall in self.walls:
+		if wall.position.x > max_size.x:
+			max_size.x = wall.position.x
+		if wall.position.y > max_size.y:
+			max_size.y = wall.position.y
+	self.width = max_size.x + tile_size
+	self.height = max_size.y + tile_size
 
 func _setup_objects():	
 	_setup_player()

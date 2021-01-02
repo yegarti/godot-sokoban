@@ -20,6 +20,8 @@ func _load_new_level(level_id: int):
 	add_child(level)
 	level.connect("level_completed", self, "_on_Level_completed")
 
+	$Camera2D.position = Vector2(level.width / 2, level.height / 2)
+
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
 		get_tree().quit(0)
