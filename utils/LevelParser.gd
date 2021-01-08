@@ -1,4 +1,4 @@
-var levels = {}
+var levels = []
 var number_of_levels
 
 const PLAYER = '@'
@@ -16,31 +16,33 @@ func _init():
 	var file = File.new()
 	file.open("res://levels/levels.txt", File.READ)
 	var lines = []
-	var level_name
-	var raw_levels = {}
+	#var level_number = 0
+	var raw_levels = []
 	while not file.eof_reached():
 		var line = file.get_line()
 		var stripped_line = line.strip_edges()
 		if stripped_line.begins_with(';') or stripped_line.empty():
-			continue
-		if stripped_line.begins_with('-'):
-			level_name = line.substr(1)
-			raw_levels[level_name] = []
+			if raw_levels.empty():
+				raw_levels.append([])
+			elif not raw_levels[-1].empty():
+				raw_levels.append([])
 		else:  # level character
-			raw_levels[level_name].append(line)
+			raw_levels[-1].append(line)
 	file.close()
+	
+	# remove levels crated by extra newline
+	if not raw_levels.empty() and raw_levels[-1].empty():
+		raw_levels = raw_levels.slice(0, -2)
 
-	var i = 0
-	for level in _parse_levels(raw_levels).values():
-		levels[i] = level
-		i += 1
-	number_of_levels = i
+	for level in _parse_levels(raw_levels):
+		levels.append(level)
+	number_of_levels = len(levels)
 
-func _parse_levels(levels: Dictionary):
-	var game_levels = {}
-	for level_name in levels.keys():
-		var level = _parse_level(levels[level_name])
-		game_levels[level_name] = level
+func _parse_levels(levels: Array):
+	var game_levels = []
+	for raw_level in levels:
+		var level = _parse_level(raw_level)
+		game_levels.append(level)
 	return game_levels
 
 func _parse_level(raw_level: Array):
