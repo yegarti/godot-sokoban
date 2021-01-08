@@ -29,14 +29,29 @@ const ground_texture = preload("res://assets/PNG/Ground/ground_01.png")
 
 var width: int
 var height: int
+var move_stack: Array
+var level_completed = false
 
 func initialize(level_info: LevelInfo):
 	self.level_info = level_info
 	_setup_objects()
 	_calc_level_size()
 
+func undo():
+	if not self.move_stack.empty():
+		var last_turn_entry = move_stack.pop_back()
+		var opposite_dir = last_turn_entry['direction'] * Vector2(-1, -1)
+		
+		self.player.force_move(opposite_dir)
+		
+		var crate = last_turn_entry['crate_moved']
+		if crate:
+			crate.force_move(opposite_dir)
+
 func _calc_level_size():
 	var max_size = Vector2(0, 0)
+	
+	# All levels are bound by walls
 	for wall in self.walls:
 		if wall.position.x > max_size.x:
 			max_size.x = wall.position.x
@@ -58,13 +73,11 @@ func _init_objects(objects: PoolVector2Array, obj_scene, container):
 		obj.position = object_pos * tile_size
 		container.append(obj)
 
-func _ready():
-	pass
-
 func _setup_player():
 	self.player = player_scene.instance()
 	self.player.position = level_info.player * tile_size
 	self.player.set_z_index(OBJECTS_Z_INDEX)
+	player.connect("turn_ended", self, "_on_Player_turn_ended")
 	add_child(self.player)
 
 func _setup_goals():
@@ -111,23 +124,27 @@ func _create_ground_tile(position):
 	ch.position = position
 	return ch
 	
+func _check_victory_condition():
+	if self.crates_on_goal == len(self.goals):
+		if not self.level_completed:
+			self.level_completed = true
+			emit_signal("level_completed")
+	else:
+		self.level_completed = false
+
+# Callbacks
 func _on_Crate_entered_Goal(area):
 	self.crates_on_goal += 1
-	if self.crates_on_goal == len(self.goals):
-		# To avoid a case when a crate is moving from goal to goal and conidered
-		# as scoring 2 goals, the game will check again the end condition when timer
-		# expires and movement has setteled
-		var timer = Timer.new()
-		timer.one_shot = true
-		timer.autostart = true
-		timer.wait_time = 0.1
-		add_child(timer)
-		timer.connect("timeout", self, "_on_Timeout_level_ended_check")
-		#emit_signal("level_completed")
-
-func _on_Timeout_level_ended_check():
-	if self.crates_on_goal == len(self.goals):
-		emit_signal("level_completed")
 
 func _on_Crate_exited_Goal(area):
 	self.crates_on_goal -= 1
+
+func _physics_process(delta):
+	_check_victory_condition()
+
+func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
+	var entry = Dictionary()
+	entry['direction'] = direction
+	entry['crate_moved'] = crate_moved
+	self.move_stack.append(entry)
+	

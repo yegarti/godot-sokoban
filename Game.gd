@@ -25,6 +25,8 @@ func _load_new_level(level_id: int):
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
 		get_tree().quit(0)
+	if event.is_action_pressed("ui_undo"):
+		level.undo()
 	if Input.is_key_pressed(KEY_L):
 		level_id += 1
 		level_id = level_id % level_parser.number_of_levels

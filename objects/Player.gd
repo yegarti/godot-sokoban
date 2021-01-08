@@ -7,6 +7,9 @@ var inputs = {
 	"ui_down": Vector2.DOWN,
 }
 
+var crate_moved_this_turn: Crate
+signal turn_ended(direction, crate_moved)
+
 func _ready():
 	$RayCast2D.set_collide_with_areas(true)
 	
@@ -24,8 +27,14 @@ func is_moveable_to(dir):
 	elif collider.has_method("is_moveable_to"):
 		if collider.is_moveable_to(dir):
 			collider.move(dir)
+			crate_moved_this_turn = collider
 			return true
 		else:
 			return false
 	else:
 		return false
+
+func move(direction):
+	.move(direction)
+	emit_signal("turn_ended", direction, crate_moved_this_turn)
+	crate_moved_this_turn = null
