@@ -13,9 +13,9 @@ signal turn_ended(direction, crate_moved)
 func _ready():
 	$RayCast2D.set_collide_with_areas(true)
 	
-func _unhandled_input(event):
+func _physics_process(delta):
 	for dir in inputs.keys():
-		if event.is_action_pressed(dir):
+		if Input.is_action_just_pressed(dir):
 			move(inputs[dir])
 
 func is_moveable_to(dir):
@@ -35,6 +35,7 @@ func is_moveable_to(dir):
 		return false
 
 func move(direction):
-	.move(direction)
-	emit_signal("turn_ended", direction, crate_moved_this_turn)
-	crate_moved_this_turn = null
+	if self.is_moveable_to(direction):
+		.move(direction)
+		emit_signal("turn_ended", direction, crate_moved_this_turn)
+		crate_moved_this_turn = null

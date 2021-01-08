@@ -31,6 +31,7 @@ var width: int
 var height: int
 var move_stack: Array
 var level_completed = false
+var enable_undo_stack = true
 
 func initialize(level_info: LevelInfo):
 	self.level_info = level_info
@@ -40,13 +41,15 @@ func initialize(level_info: LevelInfo):
 func undo():
 	if not self.move_stack.empty():
 		var last_turn_entry = move_stack.pop_back()
-		var opposite_dir = last_turn_entry['direction'] * Vector2(-1, -1)
 		
-		self.player.force_move(opposite_dir)
+		var opposite_dir = last_turn_entry['direction'] * Vector2(-1, -1)
+		self.enable_undo_stack = false
+		self.player.move(opposite_dir)
+		self.enable_undo_stack = true
 		
 		var crate = last_turn_entry['crate_moved']
 		if crate:
-			crate.force_move(opposite_dir)
+			crate.move(opposite_dir)
 
 func _calc_level_size():
 	var max_size = Vector2(0, 0)
@@ -143,8 +146,9 @@ func _physics_process(delta):
 	_check_victory_condition()
 
 func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
-	var entry = Dictionary()
-	entry['direction'] = direction
-	entry['crate_moved'] = crate_moved
-	self.move_stack.append(entry)
+	if self.enable_undo_stack:
+		var entry = Dictionary()
+		entry['direction'] = direction
+		entry['crate_moved'] = crate_moved
+		self.move_stack.append(entry)
 	

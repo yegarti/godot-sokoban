@@ -17,8 +17,4 @@ func is_moveable_to(dir):
 	return !self.ray.is_colliding()
 
 func move(dir: Vector2):
-	if is_moveable_to(dir):
-		self.position += dir * tile_size
-
-func force_move(dir: Vector2):
 	self.position += dir * tile_size
