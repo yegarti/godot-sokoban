@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "LevelInfo",
 "language": "GDScript",
 "path": "res://utils/LevelInfo.gd"
+}, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://objects/Player.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "Crate": "",
-"LevelInfo": ""
+"LevelInfo": "",
+"Player": ""
 }
 
 [application]

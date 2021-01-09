@@ -1,5 +1,7 @@
 extends Character
 
+class_name Player
+
 var inputs = {
 	"ui_right": Vector2.RIGHT,
 	"ui_left": Vector2.LEFT,
@@ -25,7 +27,9 @@ func is_moveable_to(dir):
 	if !collider:
 		return true
 	elif collider.has_method("is_moveable_to"):
-		if collider.is_moveable_to(dir):
+		# edge case can make Player colide with itself
+		if not collider as Player and \
+		collider.is_moveable_to(dir):
 			collider.move(dir)
 			crate_moved_this_turn = collider
 			return true
