@@ -19,15 +19,22 @@ func _load_new_level(level_id: int):
 	level.initialize(level_parser.get_level(level_id))
 	add_child(level)
 	level.connect("level_completed", self, "_on_Level_completed")
+	$GUI.set_level_name("Level " + str(level_id + 1))
 
 	$Camera2D.position = Vector2(level.width / 2, level.height / 2)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
 		get_tree().quit(0)
-	if event.is_action_pressed("ui_undo"):
+	elif event.is_action_pressed("ui_undo"):
 		level.undo()
-	if Input.is_key_pressed(KEY_L):
-		level_id += 1
-		level_id = level_id % level_parser.number_of_levels
+	elif event.is_action_pressed("ui_reset"):
+		_load_new_level(level_id)
+	elif event.is_action_pressed("ui_prev_level"):
+		level_id -= 1
+		if level_id < 0:
+			level_id = level_parser.number_of_levels - 1
+		_load_new_level(level_id)
+	elif event.is_action_pressed("ui_next_level"):
+		level_id = (level_id + 1) % level_parser.number_of_levels
 		_load_new_level(level_id)

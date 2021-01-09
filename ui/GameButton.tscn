@@ -23,6 +23,8 @@ __meta__ = {
 [node name="TextureButton" type="TextureButton" parent="."]
 margin_right = 190.0
 margin_bottom = 49.0
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 1 )
 texture_hover = ExtResource( 5 )
