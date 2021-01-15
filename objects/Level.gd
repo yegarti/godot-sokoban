@@ -32,6 +32,7 @@ var height: int
 var move_stack: Array
 var level_completed = false
 var enable_undo_stack = true
+var turn_ended = true
 
 func initialize(level_info: LevelInfo):
 	self.level_info = level_info
@@ -143,7 +144,9 @@ func _on_Crate_exited_Goal(area):
 	self.crates_on_goal -= 1
 
 func _physics_process(delta):
-	_check_victory_condition()
+	if turn_ended:
+		_check_victory_condition()
+		turn_ended = false
 
 func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
 	if self.enable_undo_stack:
@@ -151,4 +154,5 @@ func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
 		entry['direction'] = direction
 		entry['crate_moved'] = crate_moved
 		self.move_stack.append(entry)
+	turn_ended = true
 	
