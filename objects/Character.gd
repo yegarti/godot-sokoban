@@ -1,9 +1,12 @@
 extends Area2D
 
 class_name Character
-	
+
+signal movement_started
+signal movement_ended
+
 var tile_size = Globals.tile_size
-var tween_duration = 0.05
+var tween_duration = 0.03
 onready var ray = $RayCast2D
 onready var tween = $Tween
 var _tween_in_progress = false
@@ -28,15 +31,13 @@ func move(dir: Vector2):
 		self.position, self.position + (dir * tile_size), self.tween_duration,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
-		yield($Tween, "tween_completed")
 	else:
 		self.position += dir * tile_size
 
 func _on_Tween_started(obj, node):
 	self._tween_in_progress = true
+	emit_signal("movement_started")
 	
 func _on_Tween_ended(obj, node):
 	self._tween_in_progress = false
-
-func is_moving():
-	return self._tween_in_progress
+	emit_signal("movement_ended")
