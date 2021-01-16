@@ -42,11 +42,9 @@ func initialize(level_info: LevelInfo):
 func undo():
 	if not self.move_stack.empty():
 		var last_turn_entry = move_stack.pop_back()
-		
 		var opposite_dir = last_turn_entry['direction'] * Vector2(-1, -1)
 		self.enable_undo_stack = false
-		self.player.move(opposite_dir)
-		self.enable_undo_stack = true
+		self.player.move(opposite_dir, true)
 		
 		var crate = last_turn_entry['crate_moved']
 		if crate:
@@ -154,5 +152,7 @@ func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
 		entry['direction'] = direction
 		entry['crate_moved'] = crate_moved
 		self.move_stack.append(entry)
+	else:
+		self.enable_undo_stack = true
 	turn_ended = true
 	
