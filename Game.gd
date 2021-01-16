@@ -5,6 +5,10 @@ var level_id = 0
 var level_scene = preload("res://objects/Level.tscn")
 onready var level_parser = load("res://utils/LevelParser.gd").new()
 
+onready var width = get_viewport().size.x
+onready var height = get_viewport().size.y
+onready var visible_height = height - $GUI.get_size().y
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_load_new_level(level_id)
@@ -21,7 +25,7 @@ func _load_new_level(level_id: int):
 	level.connect("level_completed", self, "_on_Level_completed")
 	$GUI.set_level_name("Level " + str(level_id + 1))
 
-	$Camera2D.position = Vector2(level.width / 2, level.height / 2)
+	_adjust_camera()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
@@ -38,3 +42,9 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("ui_next_level"):
 		level_id = (level_id + 1) % level_parser.number_of_levels
 		_load_new_level(level_id)
+
+func _adjust_camera():
+	$Camera2D.position = Vector2(level.width / 2, (level.height - (self.height - self.visible_height)) / 2)
+	var zoom_scale = max(max(level.width / self.width, 1),
+						 (max(level.height / self.visible_height, 1)))
+	$Camera2D.zoom = Vector2.ONE * zoom_scale

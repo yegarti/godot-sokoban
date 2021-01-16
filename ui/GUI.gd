@@ -25,3 +25,6 @@ func _send_input_action(action):
 	ev.pressed = true
 	Input.parse_input_event(ev)
 	ev.pressed = false
+
+func get_size():
+	return Vector2($MarginContainer.rect_size.x, $MarginContainer.rect_size.y)
