@@ -19,13 +19,10 @@ var dir_names = {
 	Vector2.DOWN: 'down',
 }
 
-var crate_moved_this_turn: Crate
-var direction_this_turn: Vector2
-var reversed = false
-
 var curr_animation = "move_down"
 var curr_animation_frame = 0
 var is_moving = false
+var last_turn_info = {'crate_moved': null, 'reverse': false, 'direction': Vector2.ZERO}
 var moves = 0
 var pushes = 0
 
@@ -50,7 +47,7 @@ func is_moveable_to(dir):
 		if not collider as Player and \
 		collider.is_moveable_to(dir):
 			collider.move(dir)
-			crate_moved_this_turn = collider
+			last_turn_info['crate_moved'] = collider
 			return true
 		else:
 			return false
@@ -61,9 +58,11 @@ func move(direction, reversing=false):
 	if self.is_moving:
 		return
 	self.is_moving = true
+	last_turn_info.clear()
+	last_turn_info['crate_moved'] = null
 	if self.is_moveable_to(direction):
-		self.reversed = reversing
-		self.direction_this_turn = direction
+		last_turn_info['reverse'] = reversing
+		last_turn_info['direction'] = direction
 		_set_animation(direction, reversing)
 		.move(direction)
 	else:
@@ -104,12 +103,11 @@ func _translate_movement(dir):
 			return dir_names[v]
 	return dir
 func _on_move_end():
-	if self.reversed:
+	if last_turn_info['reverse']:
 		moves -= 1
 	else:
 		moves += 1
 	Logger.info("Player move #{moves}: {a}".format({'moves': moves,
-	 'a': str(_translate_movement(direction_this_turn))}), TAG)
-	emit_signal("turn_ended", direction_this_turn, crate_moved_this_turn)
-	crate_moved_this_turn = null
+	 'a': str(_translate_movement(last_turn_info['direction']))}), TAG)
+	emit_signal("turn_ended", last_turn_info['direction'], last_turn_info['crate_moved'])
 	is_moving = false
