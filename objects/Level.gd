@@ -112,11 +112,6 @@ func _setup_ground():
 		add_child(_create_ground_tile(ground * tile_size))
 	for wall in level_info.walls:
 		add_child(_create_ground_tile(wall * tile_size))
-	for goal in level_info.goals:
-		add_child(_create_ground_tile(goal * tile_size))
-	for crate in level_info.crates:
-		add_child(_create_ground_tile(crate * tile_size))
-	add_child(_create_ground_tile(level_info.player * tile_size))
 
 func _create_ground_tile(position):
 	var ch = Character.new()

@@ -45,19 +45,49 @@ func _parse_levels(levels: Array):
 		game_levels.append(level)
 	return game_levels
 
+func _find_ground_tiles(raw_level: Array):
+	# use flood fill algorithm to find all tiles within the level and
+	# mark them using the 'ground' character
+
+	# find player to use as start for flood fill
+	var player_pos = null
+	var y = 0
+	for row in raw_level:
+		var x = 0
+		if player_pos:
+			break
+		for tile in row:
+			if tile == PLAYER or tile == PLAYER_ON_GOAL:
+				player_pos = Vector2(x, y)
+				break
+			x += 1
+		y += 1
+
+	# flood fill to find all ground tiles
+	var stack = [player_pos]
+	var ground_positions = PoolVector2Array()
+	while not stack.empty():
+		var tile_pos = stack.pop_back()
+		if raw_level[tile_pos.y][tile_pos.x] != WALL and not tile_pos in ground_positions:
+			ground_positions.append(tile_pos)
+			stack.push_back(tile_pos + Vector2.DOWN)
+			stack.push_back(tile_pos + Vector2.UP)
+			stack.push_back(tile_pos + Vector2.LEFT)
+			stack.push_back(tile_pos + Vector2.RIGHT)
+
+	return ground_positions
+
 func _parse_level(raw_level: Array):
-	var inside = false
 	var x = 0
 	var y = 0
 	var player
 	var walls = PoolVector2Array()
-	var ground = PoolVector2Array()
+	var ground = _find_ground_tiles(raw_level)
 	var crates = PoolVector2Array()
 	var goals = PoolVector2Array()
 	for row in raw_level:
 		x = 0
-		inside = false
-		for ch in row.rstrip(GROUND):
+		for ch in row:
 			var position = Vector2(x, y)
 			if ch == PLAYER or ch == PLAYER_ON_GOAL:
 				player = position
@@ -67,9 +97,6 @@ func _parse_level(raw_level: Array):
 				goals.append(position)
 			if ch == WALL:
 				walls.append(position)
-				inside = true
-			if ch == GROUND and inside:
-				ground.append(position)
 			x += 1
 		y += 1
 	return _create_level(player, goals, crates, walls, ground)
