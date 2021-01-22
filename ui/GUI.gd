@@ -5,9 +5,12 @@ onready var reset_button = $MarginContainer/Elements/HBoxContainer/ResetButton/T
 onready var prev_level_button = $MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
 onready var next_level_button = $MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
 onready var level_name_labe = $MarginContainer/Elements/HBoxContainer/LevelLabel
+onready var level_completed_message = $LevelCompletedMessage
 
 signal undo_pressed
 signal reset_pressed
+
+const LEVEL_COMPLETED_TWEEN_DURATION = 1
 
 func _ready():
 	undo_button.connect("button_down", self, "_send_input_action", ["ui_undo"])
@@ -28,3 +31,9 @@ func _send_input_action(action):
 
 func get_size():
 	return Vector2($MarginContainer.rect_size.x, $MarginContainer.rect_size.y)
+
+func show_level_completed_label(slow = false):
+	self.level_completed_message.show_msg(self.LEVEL_COMPLETED_TWEEN_DURATION if slow else 0)
+
+func hide_level_completed_label(slow = false):
+	self.level_completed_message.hide_msg(self.LEVEL_COMPLETED_TWEEN_DURATION if slow else 0)

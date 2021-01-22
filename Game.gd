@@ -13,7 +13,9 @@ onready var visible_height = height - $GUI.get_size().y
 func _ready():
 	_load_new_level(level_id)
 
+
 func _on_Level_completed():
+	$GUI.show_level_completed_label(true)
 	print("Good job!")
 
 func _load_new_level(level_id: int):
@@ -24,7 +26,7 @@ func _load_new_level(level_id: int):
 	add_child(level)
 	level.connect("level_completed", self, "_on_Level_completed")
 	$GUI.set_level_name("Level " + str(level_id + 1))
-
+	$GUI.hide_level_completed_label()
 	_adjust_camera()
 
 func _unhandled_input(event):
