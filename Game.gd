@@ -4,6 +4,7 @@ var level = null
 var level_id = 0
 var level_scene = preload("res://objects/Level.tscn")
 onready var level_parser = load("res://utils/LevelParser.gd").new()
+const TAG = "Game"
 
 onready var width = get_viewport().size.x
 onready var height = get_viewport().size.y
@@ -16,7 +17,7 @@ func _ready():
 
 func _on_Level_completed():
 	$GUI.show_level_completed_label(true)
-	print("Good job!")
+	Logger.info("Level completed!", TAG)
 
 func _load_new_level(level_id: int):
 	if level:

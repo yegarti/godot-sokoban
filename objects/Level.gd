@@ -149,5 +149,9 @@ func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
 		self.move_stack.append(entry)
 	else:
 		self.enable_undo_stack = true
+
+	# wait for a complete physics step before confirming that a turn has ended
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
 	turn_ended = true
 	
