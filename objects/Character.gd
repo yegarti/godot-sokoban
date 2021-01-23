@@ -5,8 +5,8 @@ class_name Character
 signal movement_started
 signal movement_ended
 
-var tile_size = Globals.tile_size
-var tween_duration = 0.03
+var tile_size = Globals.TILE_SIZE
+var tween_duration = Globals.MOVE_DURATION
 onready var ray = $RayCast2D
 onready var tween = $Tween
 var _tween_in_progress = false

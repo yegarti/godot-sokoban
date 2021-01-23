@@ -11,7 +11,7 @@ var player
 
 var level_info
 
-var tile_size = Globals.tile_size
+var tile_size = Globals.TILE_SIZE
 
 const PLAYER_COLLISION_BIT= 0x1
 const GOAL_COLLISION_BIT= 0x2
