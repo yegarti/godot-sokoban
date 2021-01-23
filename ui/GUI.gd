@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-onready var undo_button = $MarginContainer/Elements/HBoxContainer/UndoButton/TextureButton
-onready var reset_button = $MarginContainer/Elements/HBoxContainer/ResetButton/TextureButton
-onready var prev_level_button = $MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
-onready var next_level_button = $MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
-onready var level_name_labe = $MarginContainer/Elements/HBoxContainer/LevelLabel
-onready var level_completed_message = $LevelCompletedMessage
+onready var undo_button = $Control/MarginContainer/Elements/HBoxContainer/UndoButton/TextureButton
+onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/ResetButton/TextureButton
+onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
+onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
+onready var level_name_labe = $Control/MarginContainer/Elements/HBoxContainer/LevelLabel
+onready var level_completed_message = $Control/LevelCompletedMessage
 
 signal undo_pressed
 signal reset_pressed
@@ -17,6 +17,13 @@ func _ready():
 	reset_button.connect("button_down", self, "_send_input_action", ["ui_reset"])
 	prev_level_button.connect("button_down", self, "_send_input_action", ["ui_prev_level"])
 	next_level_button.connect("button_down", self, "_send_input_action", ["ui_next_level"])
+
+func show():
+	$Control.visible = true
+
+func hide():
+	$Control.visible = false
+
 
 func set_level_name(name):
 	level_name_labe.text = name
@@ -30,10 +37,10 @@ func _send_input_action(action):
 	ev.pressed = false
 
 func get_size():
-	return Vector2($MarginContainer.rect_size.x, $MarginContainer.rect_size.y)
+	return Vector2($Control/MarginContainer.rect_size.x, $Control/MarginContainer.rect_size.y)
 
 func show_level_completed_label(slow = false):
-	self.level_completed_message.show_msg(self.LEVEL_COMPLETED_TWEEN_DURATION if slow else 0)
+	self.level_completed_message.show_msg(Globals.LVL_DONE_MESSAGE_VISIBLE_TIME if slow else 0)
 
 func hide_level_completed_label(slow = false):
-	self.level_completed_message.hide_msg(self.LEVEL_COMPLETED_TWEEN_DURATION if slow else 0)
+	self.level_completed_message.hide_msg(Globals.LVL_DONE_MESSAGE_VISIBLE_TIME if slow else 0)

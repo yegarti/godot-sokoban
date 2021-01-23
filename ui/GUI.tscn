@@ -20,9 +20,18 @@ font_data = ExtResource( 5 )
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Control" type="Control" parent="."]
 anchor_right = 1.0
-margin_bottom = 54.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+anchor_right = 1.0
+margin_bottom = 109.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -31,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="NinePatchRect" parent="MarginContainer"]
+[node name="Background" type="NinePatchRect" parent="Control/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1346.0
@@ -40,7 +49,7 @@ texture = ExtResource( 2 )
 patch_margin_left = 10
 patch_margin_right = 10
 
-[node name="Elements" type="MarginContainer" parent="MarginContainer"]
+[node name="Elements" type="MarginContainer" parent="Control/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1346.0
@@ -53,21 +62,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Elements"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/Elements"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1316.0
 margin_bottom = 59.0
 
-[node name="ResetButton" parent="MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
+[node name="ResetButton" parent="Control/MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
 text = "reset"
 
-[node name="UndoButton" parent="MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
+[node name="UndoButton" parent="Control/MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 194.0
 margin_right = 384.0
 text = "undo"
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/Elements/HBoxContainer"]
+[node name="LevelLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_left = 388.0
 margin_top = 6.0
 margin_right = 918.0
@@ -78,31 +87,29 @@ text = "Level 0"
 align = 1
 valign = 1
 
-[node name="PrevLevelButton" parent="MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
+[node name="PrevLevelButton" parent="Control/MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 922.0
 margin_right = 1112.0
 text = "previous level"
 
-[node name="NextLevelButton" parent="MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
+[node name="NextLevelButton" parent="Control/MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 1116.0
 margin_right = 1306.0
 text = "next level"
 
-[node name="LevelCompletedMessage" type="MarginContainer" parent="."]
-anchor_left = 0.35
-anchor_top = 0.2
-anchor_right = 0.65
-anchor_bottom = 0.3
-margin_bottom = 21.0
+[node name="LevelCompletedMessage" type="MarginContainer" parent="Control"]
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.25
+margin_bottom = 36.0
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="LevelCompletedMessage"]
-margin_top = 30.0
-margin_right = 409.0
-margin_bottom = 66.0
+[node name="Label" type="Label" parent="Control/LevelCompletedMessage"]
+margin_right = 1366.0
+margin_bottom = 36.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
@@ -116,4 +123,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="LevelCompletedMessage"]
+[node name="Tween" type="Tween" parent="Control/LevelCompletedMessage"]
