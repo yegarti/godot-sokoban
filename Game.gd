@@ -3,6 +3,7 @@ extends Node2D
 var level = null
 var level_id = 0
 var level_scene = preload("res://objects/Level.tscn")
+var level_completed = false
 onready var level_parser = load("res://utils/LevelParser.gd").new()
 const TAG = "Game"
 
@@ -14,12 +15,18 @@ onready var visible_height = height - $GUI.get_size().y
 func _ready():
 	_load_new_level(level_id)
 
+func _on_level_pack_selected(level_pack):
+	level_parser.set_level_pack(level_pack)
+	_load_new_level(0)
 
 func _on_Level_completed():
-	$GUI.show_level_completed_label(true)
-	Logger.info("Level completed!", TAG)
+	if not level_completed:
+		level_completed = true
+		$GUI.show_level_completed_label(true)
+		Logger.info("Level completed!", TAG)
 
 func _load_new_level(level_id: int):
+	$GUI.show()
 	if level:
 		level.queue_free()
 	level = level_scene.instance()
@@ -28,6 +35,7 @@ func _load_new_level(level_id: int):
 	level.connect("level_completed", self, "_on_Level_completed")
 	$GUI.set_level_name("Level " + str(level_id + 1))
 	$GUI.hide_level_completed_label()
+	level_completed = false
 	_adjust_camera()
 
 func _unhandled_input(event):

@@ -14,7 +14,7 @@ func get_level(level_id: int):
 
 func _init():
 	var file = File.new()
-	file.open("res://levels/levels.txt", File.READ)
+	file.open(Globals.curr_level_pack_file, File.READ)
 	var lines = []
 	#var level_number = 0
 	var raw_levels = []
