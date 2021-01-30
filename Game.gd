@@ -34,6 +34,7 @@ func _load_new_level(level_id: int):
 	add_child(level)
 	level.connect("level_completed", self, "_on_Level_completed")
 	$GUI.set_level_name("Level " + str(level_id + 1))
+	$GUI.set_level_pack_name(Globals.curr_level_pack_name)
 	$GUI.hide_level_completed_label()
 	level_completed = false
 	_adjust_camera()

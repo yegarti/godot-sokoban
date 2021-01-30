@@ -4,7 +4,8 @@ onready var undo_button = $Control/MarginContainer/Elements/HBoxContainer/UndoBu
 onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/ResetButton/TextureButton
 onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
 onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
-onready var level_name_labe = $Control/MarginContainer/Elements/HBoxContainer/LevelLabel
+onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelLabel
+onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelPackLabel
 onready var level_completed_message = $Control/LevelCompletedMessage
 
 signal undo_pressed
@@ -26,7 +27,10 @@ func hide():
 
 
 func set_level_name(name):
-	level_name_labe.text = name
+	level_name_label.text = name
+
+func set_level_pack_name(name):
+	level_pack_name_label.text = name
 
 func _send_input_action(action):
 	var ev = InputEventAction.new()
