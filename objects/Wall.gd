@@ -1,2 +1,2 @@
-extends Character
+extends BlockSprite
 

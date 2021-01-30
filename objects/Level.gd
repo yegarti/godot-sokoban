@@ -114,7 +114,7 @@ func _setup_ground():
 		add_child(_create_ground_tile(wall * tile_size))
 
 func _create_ground_tile(position):
-	var ch = Character.new()
+	var ch = BlockSprite.new()
 	var sprite = Sprite.new()
 	sprite.texture = ground_texture
 	ch.add_child(sprite)

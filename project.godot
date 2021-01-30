@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "BlockSprite",
+"language": "GDScript",
+"path": "res://objects/BlockSprite.gd"
+}, {
+"base": "BlockSprite",
 "class": "Character",
 "language": "GDScript",
 "path": "res://objects/Character.gd"
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://objects/Player.gd"
 } ]
 _global_script_class_icons={
+"BlockSprite": "",
 "Character": "",
 "Crate": "",
 "CustomButton": "",

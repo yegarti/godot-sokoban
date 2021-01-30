@@ -1,22 +1,18 @@
-extends Area2D
+extends BlockSprite
 
 class_name Character
 
 signal movement_started
 signal movement_ended
 
-var tile_size = Globals.TILE_SIZE
 var tween_duration = Globals.MOVE_DURATION
 onready var ray = $RayCast2D
 onready var tween = $Tween
 var _tween_in_progress = false
 
 func _ready():
-	self.position = self.position.snapped(Vector2.ONE * tile_size)
-	self.position += Vector2.ONE * tile_size / 2
-	if $Tween:
-		$Tween.connect("tween_started", self, "_on_Tween_started")
-		$Tween.connect("tween_completed", self, "_on_Tween_ended")
+	$Tween.connect("tween_started", self, "_on_Tween_started")
+	$Tween.connect("tween_completed", self, "_on_Tween_ended")
 
 func is_moveable_to(dir):
 	if !self.ray:

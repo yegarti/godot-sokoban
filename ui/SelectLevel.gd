@@ -21,7 +21,7 @@ func add_level(name, level_pack_path):
 	level_container.add_child(level_button)
 
 func _load_level_action(level_file_name):
-	print(level_file_name)
+	Logger.info("Loading level pack: " + level_file_name)
 	#queue_free()
 	Globals.curr_level_pack_file = level_file_name
 	get_tree().change_scene_to(game_scene)
