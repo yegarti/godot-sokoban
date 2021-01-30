@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/label_HP_bg.png" type="Texture" id=2]
@@ -7,12 +7,18 @@
 [ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/LevelCompletedMessage.gd" type="Script" id=6]
 
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 4 )
+
 [sub_resource type="DynamicFont" id=3]
 size = 15
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -81,14 +87,31 @@ margin_right = 384.0
 size_flags_vertical = 0
 text = "undo"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
+[node name="PushesContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_left = 388.0
-margin_right = 918.0
+margin_right = 565.0
+margin_bottom = 59.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 100
+
+[node name="PushesLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/PushesContainer"]
+margin_left = 100.0
+margin_top = 7.0
+margin_right = 157.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 4 )
+text = "Pushes
+0"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
+margin_left = 569.0
+margin_right = 721.0
 margin_bottom = 59.0
 size_flags_horizontal = 3
 
 [node name="LevelPackLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/VBoxContainer"]
-margin_right = 530.0
+margin_right = 152.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 3 )
@@ -98,13 +121,34 @@ valign = 1
 
 [node name="LevelLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/VBoxContainer"]
 margin_top = 23.0
-margin_right = 530.0
+margin_right = 152.0
 margin_bottom = 59.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 1 )
 text = "Level 0"
 align = 1
 valign = 1
+
+[node name="MovesContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
+margin_left = 725.0
+margin_right = 918.0
+margin_bottom = 59.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 120
+custom_constants/margin_left = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovesLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/MovesContainer"]
+margin_left = 20.0
+margin_top = 7.0
+margin_right = 73.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 5 )
+text = "Moves
+0"
+align = 1
 
 [node name="PrevLevelButton" parent="Control/MarginContainer/Elements/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 922.0

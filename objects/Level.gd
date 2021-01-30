@@ -3,6 +3,8 @@ extends Node2D
 signal level_completed
 
 
+const TAG = "Player"
+
 var crates_on_goal = 0
 var goals = []
 var crates = []
@@ -27,12 +29,17 @@ const goal_scene = preload("res://objects/Landing.tscn")
 
 const ground_texture = preload("res://assets/PNG/Ground/ground_01.png")
 
+onready var helper = load("res://utils/Helper.gd").new()
+
 var width: int
 var height: int
 var move_stack: Array
 var level_completed = false
 var enable_undo_stack = true
 var turn_ended = true
+
+var moves: int
+var pushes: int
 
 func initialize(level_info: LevelInfo):
 	self.level_info = level_info
@@ -49,6 +56,10 @@ func undo():
 		var crate = last_turn_entry['crate_moved']
 		if crate:
 			crate.move(opposite_dir)
+			pushes -= 1
+
+func get_stats():
+	return {'moves': moves, 'pushes': pushes}
 
 func _calc_level_size():
 	var max_size = Vector2(0, 0)
@@ -141,7 +152,22 @@ func _physics_process(delta):
 		_check_victory_condition()
 		turn_ended = false
 
+func _translate_movement(dir):
+	var vec_dir = {Vector2.UP: 'Up', Vector2.DOWN: 'Down',
+	 Vector2.LEFT: 'Left', Vector2.RIGHT: 'Right'}
+	for vec in vec_dir:
+		if helper.is_close(dir ,vec):
+			return vec_dir[vec]
+	return dir
+
 func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
+	moves += int(self.enable_undo_stack)  * 1 + int(not self.enable_undo_stack) * -1
+	
+	# undo push reported in 'undo' function
+	pushes += int(self.enable_undo_stack)  * int(crate_moved != null)
+	Logger.info("Player move #{moves}: {dir}".format({'moves': moves,
+	 'dir': str(_translate_movement(direction))}), TAG)
+
 	if self.enable_undo_stack:
 		var entry = Dictionary()
 		entry['direction'] = direction
@@ -153,5 +179,6 @@ func _on_Player_turn_ended(direction: Vector2, crate_moved: Crate):
 	# wait for a complete physics step before confirming that a turn has ended
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
+	
 	turn_ended = true
 	

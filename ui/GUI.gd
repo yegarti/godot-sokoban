@@ -5,6 +5,8 @@ onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/Reset
 onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
 onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
 onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelLabel
+onready var moves_label = $Control/MarginContainer/Elements/HBoxContainer/MovesContainer/MovesLabel
+onready var pushes_label = $Control/MarginContainer/Elements/HBoxContainer/PushesContainer/PushesLabel
 onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelPackLabel
 onready var level_completed_message = $Control/LevelCompletedMessage
 
@@ -32,6 +34,12 @@ func set_level_name(name):
 func set_level_pack_name(name):
 	level_pack_name_label.text = name
 
+func set_pushes(new_pushes):
+	pushes_label.text = "Pushes\n" + str(new_pushes)
+	
+func set_moves(new_moves):
+	moves_label.text = "Moves\n" + str(new_moves)
+	
 func _send_input_action(action):
 	var ev = InputEventAction.new()
 	ev.action = action

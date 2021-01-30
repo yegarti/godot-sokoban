@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://ui/CustomButton.gd"
 }, {
 "base": "Reference",
+"class": "Helper",
+"language": "GDScript",
+"path": "res://utils/Helper.gd"
+}, {
+"base": "Reference",
 "class": "LevelInfo",
 "language": "GDScript",
 "path": "res://utils/LevelInfo.gd"
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "Character": "",
 "Crate": "",
 "CustomButton": "",
+"Helper": "",
 "LevelInfo": "",
 "Player": ""
 }

@@ -39,6 +39,11 @@ func _load_new_level(level_id: int):
 	level_completed = false
 	_adjust_camera()
 
+func _physics_process(delta):
+	var stats = level.get_stats()
+	$GUI.set_moves(stats['moves'])
+	$GUI.set_pushes(stats['pushes'])
+
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
 		get_tree().quit(0)

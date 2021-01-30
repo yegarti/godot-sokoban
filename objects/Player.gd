@@ -12,12 +12,7 @@ var inputs = {
 	"ui_down": Vector2.DOWN,
 }
 
-var dir_names = {
-	Vector2.RIGHT: 'right',
-	Vector2.LEFT: 'left',
-	Vector2.UP: 'up',
-	Vector2.DOWN: 'down',
-}
+onready var helper = load("res://utils/Helper.gd").new()
 
 var curr_animation = "move_down"
 var curr_animation_frame = 0
@@ -73,13 +68,13 @@ func _set_animation(direction: Vector2, reverse: bool):
 		direction = direction.rotated(PI)
 
 	var new_anim
-	if is_close(direction, Vector2.UP):
+	if helper.is_close(direction, Vector2.UP):
 			new_anim = "move_up"
-	if is_close(direction, Vector2.DOWN):
+	if helper.is_close(direction, Vector2.DOWN):
 			new_anim = "move_down"
-	if is_close(direction, Vector2.LEFT):
+	if helper.is_close(direction, Vector2.LEFT):
 			new_anim = "move_left"
-	if is_close(direction, Vector2.RIGHT):
+	if helper.is_close(direction, Vector2.RIGHT):
 			new_anim = "move_right"
 
 	if new_anim == curr_animation:
@@ -94,20 +89,6 @@ func _set_next_frame():
 	$AnimatedSprite.frame = ($AnimatedSprite.frame + 1) % \
 		$AnimatedSprite.frames.get_frame_count(curr_animation)
 
-func is_close(direction: Vector2, vector: Vector2):
-	return direction.distance_to(vector) < 0.01
-
-func _translate_movement(dir):
-	for v in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]:
-		if is_close(dir ,v):
-			return dir_names[v]
-	return dir
 func _on_move_end():
-	if last_turn_info['reverse']:
-		moves -= 1
-	else:
-		moves += 1
-	Logger.info("Player move #{moves}: {a}".format({'moves': moves,
-	 'a': str(_translate_movement(last_turn_info['direction']))}), TAG)
 	emit_signal("turn_ended", last_turn_info['direction'], last_turn_info['crate_moved'])
 	is_moving = false
