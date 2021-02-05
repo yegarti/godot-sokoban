@@ -34,14 +34,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 44.0
 margin_right = 1366.0
 margin_bottom = 738.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LevelContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 1366.0
+margin_bottom = 694.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LevelContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/CenterContainer"]
 margin_left = 533.0
 margin_top = 347.0
 margin_right = 833.0

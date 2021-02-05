@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var level_container = $VBoxContainer/CenterContainer/LevelContainer
+onready var level_container = $VBoxContainer/ScrollContainer/CenterContainer/LevelContainer
 var game_scene = preload("res://Game.tscn")
 
 var level_button_scene = preload("res://ui/GameButton.tscn")
@@ -12,9 +12,8 @@ func _ready():
 func add_level(name, level_pack_path):
 	var level_button = level_button_scene.instance()
 	level_button.set_expand(true)
-	level_button.set_custom_minimum_size(Vector2(1, 100))
+	level_button.set_custom_minimum_size(Vector2(250, 57))
 	level_button.text = name
-	#level_button.get_node("Text").get("custom_fonts/font").set_size(30)
 	level_button.get_node("TextureButton").connect("button_down", self, "_load_level_action", [level_pack_path])
 	level_container.add_child(level_button)
 
