@@ -13,3 +13,6 @@ func set_text(text):
 
 func set_expand(expand):
 	$TextureButton.expand = expand
+
+func set_hint(hint):
+	$TextureButton.hint_tooltip = hint

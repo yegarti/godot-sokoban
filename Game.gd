@@ -1,5 +1,5 @@
 extends Node2D
-
+var main_menu_scene = load("res://ui/MainMenu.tscn")
 var level = null
 var level_id = 0
 var level_scene = preload("res://objects/Level.tscn")
@@ -59,9 +59,17 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("ui_next_level"):
 		level_id = (level_id + 1) % level_parser.number_of_levels
 		_load_new_level(level_id)
+	elif event.is_action_pressed("ui_main_menu"):
+		_load_main_menu()
+		queue_free()
 
 func _adjust_camera():
 	$Camera2D.position = Vector2(level.width / 2, (level.height - (self.height - self.visible_height)) / 2)
 	var zoom_scale = max(max(level.width / self.width, 1),
 						 (max(level.height / self.visible_height, 1)))
 	$Camera2D.zoom = Vector2.ONE * zoom_scale
+
+func _load_main_menu():
+	Logger.info("Changing scene to main menu")
+	queue_free()
+	get_tree().change_scene_to(main_menu_scene)

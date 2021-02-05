@@ -1,6 +1,6 @@
-extends CanvasLayer
+extends MarginContainer
 
-onready var level_container = $MarginContainer2/VBoxContainer/MarginContainer/LevelContainer
+onready var level_container = $VBoxContainer/CenterContainer/LevelContainer
 var game_scene = preload("res://Game.tscn")
 
 var level_button_scene = preload("res://ui/GameButton.tscn")
