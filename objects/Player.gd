@@ -14,6 +14,9 @@ var inputs = {
 
 onready var helper = load("res://utils/Helper.gd").new()
 
+const INPUT_DELAY = 0.2
+var _delay_from_last_input = 0
+
 var curr_animation = "move_down"
 var curr_animation_frame = 0
 var is_moving = false
@@ -27,9 +30,17 @@ func _ready():
 	self.connect("movement_ended", self, "_on_move_end")
 	
 func _physics_process(delta):
+	_delay_from_last_input += delta
+	get_input()
+
+func get_input():
 	for dir in inputs.keys():
 		if Input.is_action_just_pressed(dir):
 			move(inputs[dir])
+			_delay_from_last_input = 0
+		elif Input.is_action_pressed(dir) and _delay_from_last_input > INPUT_DELAY:
+			move(inputs[dir])
+			_delay_from_last_input = 0
 
 func is_moveable_to(dir):
 	self.ray.cast_to = dir * tile_size
