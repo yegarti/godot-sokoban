@@ -4,7 +4,8 @@ onready var undo_button = $Control/MarginContainer/Elements/HBoxContainer/UndoBu
 onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/ResetButton/TextureButton
 onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
 onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
-onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelLabel
+onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelNameContainer/LevelLabel
+onready var level_name_checkmark = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelNameContainer/LevelCheckmark
 onready var moves_label = $Control/MarginContainer/Elements/HBoxContainer/MovesContainer/MovesLabel
 onready var pushes_label = $Control/MarginContainer/Elements/HBoxContainer/PushesContainer/PushesLabel
 onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelPackLabel
@@ -39,7 +40,7 @@ func set_pushes(new_pushes):
 	
 func set_moves(new_moves):
 	moves_label.text = "Moves\n" + str(new_moves)
-	
+
 func _send_input_action(action):
 	var ev = InputEventAction.new()
 	ev.action = action
@@ -51,6 +52,12 @@ func _send_input_action(action):
 func get_size():
 	return Vector2($Control/MarginContainer.rect_size.x, $Control/MarginContainer.rect_size.y)
 
+func show_level_completed_mark():
+	self.level_name_checkmark.visible = true
+
+func hide_level_completed_mark():
+	self.level_name_checkmark.visible = false
+	
 func show_level_completed_label(slow = false):
 	self.level_completed_message.show_msg(Globals.LVL_DONE_MESSAGE_VISIBLE_TIME if slow else 0)
 

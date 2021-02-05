@@ -23,6 +23,7 @@ func _on_Level_completed():
 	if not level_completed:
 		level_completed = true
 		$GUI.show_level_completed_label(true)
+		$GUI.show_level_completed_mark()
 		Logger.info("Level completed!", TAG)
 
 func _load_new_level(level_id: int):
@@ -36,6 +37,7 @@ func _load_new_level(level_id: int):
 	$GUI.set_level_name("Level " + str(level_id + 1))
 	$GUI.set_level_pack_name(Globals.curr_level_pack_name)
 	$GUI.hide_level_completed_label()
+	$GUI.hide_level_completed_mark()
 	level_completed = false
 	_adjust_camera()
 
