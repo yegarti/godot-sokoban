@@ -1,14 +1,14 @@
 extends CanvasLayer
 
-onready var undo_button = $Control/MarginContainer/Elements/HBoxContainer/UndoButton/TextureButton
-onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/ResetButton/TextureButton
-onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/PrevLevelButton/TextureButton
-onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/NextLevelButton/TextureButton
-onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelNameContainer/LevelLabel
-onready var level_name_checkmark = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelNameContainer/LevelCheckmark
-onready var moves_label = $Control/MarginContainer/Elements/HBoxContainer/MovesContainer/MovesLabel
-onready var pushes_label = $Control/MarginContainer/Elements/HBoxContainer/PushesContainer/PushesLabel
-onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/VBoxContainer/LevelPackLabel
+onready var undo_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/UndoButton/TextureButton
+onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/ResetButton/TextureButton
+onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/PrevLevelButton/TextureButton
+onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/NextLevelButton/TextureButton
+onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelNameContainer/LevelLabel
+onready var level_name_checkmark = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelNameContainer/LevelCheckmark
+onready var moves_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/MovesContainer/MovesLabel
+onready var pushes_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/PushesContainer/PushesLabel
+onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelPackLabel
 onready var level_completed_message = $Control/LevelCompletedMessage
 
 signal undo_pressed
