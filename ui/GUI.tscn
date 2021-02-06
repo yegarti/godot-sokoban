@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/label_HP_bg.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/LevelCompletedMessage.gd" type="Script" id=6]
 [ext_resource path="res://assets/ui/PNG/green_checkmark.png" type="Texture" id=7]
+[ext_resource path="res://ui/Instructions.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -54,7 +55,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1346.0
-margin_bottom = 123.0
+margin_bottom = 99.0
 texture = ExtResource( 2 )
 patch_margin_left = 10
 patch_margin_right = 10
@@ -63,7 +64,7 @@ patch_margin_right = 10
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1346.0
-margin_bottom = 123.0
+margin_bottom = 99.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -76,40 +77,39 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1316.0
-margin_bottom = 93.0
+margin_bottom = 69.0
 
 [node name="HBoxLeft" type="HBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_right = 432.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 
 [node name="ResetButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft" instance=ExtResource( 3 )]
 size_flags_vertical = 0
 text = "reset"
 
-[node name="UndoButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft" instance=ExtResource( 3 )]
+[node name="HelpButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft" instance=ExtResource( 3 )]
 margin_left = 194.0
 margin_right = 384.0
-hint_tooltip = "asdasdsada"
-size_flags_vertical = 0
-text = "undo"
+margin_bottom = 59.0
+text = "help"
 
 [node name="HBoxMiddle" type="HBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_left = 436.0
 margin_right = 869.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="PushesContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle"]
 margin_right = 122.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 
 [node name="PushesLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/PushesContainer"]
-margin_top = 19.0
+margin_top = 7.0
 margin_right = 122.0
-margin_bottom = 64.0
+margin_bottom = 52.0
 custom_fonts/font = SubResource( 1 )
 text = "Pushes
 0"
@@ -118,7 +118,7 @@ align = 1
 [node name="VBoxLevelInfo" type="VBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle"]
 margin_left = 126.0
 margin_right = 306.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 rect_min_size = Vector2( 180, 0 )
 size_flags_horizontal = 3
 
@@ -134,7 +134,7 @@ valign = 1
 [node name="LevelNameContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo"]
 margin_top = 23.0
 margin_right = 180.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -142,9 +142,8 @@ __meta__ = {
 }
 
 [node name="LevelLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelNameContainer"]
-margin_top = 12.0
 margin_right = 180.0
-margin_bottom = 48.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 3 )
 text = "Level 100"
@@ -153,9 +152,9 @@ valign = 1
 
 [node name="LevelCheckmark" type="TextureRect" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelNameContainer"]
 margin_left = 159.0
-margin_top = 20.0
+margin_top = 8.0
 margin_right = 180.0
-margin_bottom = 40.0
+margin_bottom = 28.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 texture = ExtResource( 7 )
@@ -163,16 +162,16 @@ texture = ExtResource( 7 )
 [node name="MovesContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle"]
 margin_left = 310.0
 margin_right = 433.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MovesLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/MovesContainer"]
-margin_top = 19.0
+margin_top = 7.0
 margin_right = 123.0
-margin_bottom = 64.0
+margin_bottom = 52.0
 custom_fonts/font = SubResource( 4 )
 text = "Moves
 0"
@@ -181,7 +180,7 @@ align = 1
 [node name="HBoxRight" type="HBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_left = 873.0
 margin_right = 1306.0
-margin_bottom = 83.0
+margin_bottom = 59.0
 size_flags_horizontal = 3
 alignment = 2
 
@@ -224,3 +223,6 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="Control/LevelCompletedMessage"]
+
+[node name="Instructions" parent="Control" instance=ExtResource( 8 )]
+custom_constants/margin_top = 250

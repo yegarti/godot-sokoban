@@ -7,6 +7,7 @@ var level_completed = false
 onready var level_parser = load("res://utils/LevelParser.gd").new()
 const TAG = "Game"
 
+var help_menu_is_shown = false
 var _delay_from_last_undo = 0
 
 onready var width = get_viewport().size.x
@@ -40,6 +41,7 @@ func _load_new_level(level_id: int):
 	$GUI.set_level_pack_name(Globals.curr_level_pack_name)
 	$GUI.hide_level_completed_label()
 	$GUI.hide_level_completed_mark()
+	$GUI.hide_help_menu()
 	level_completed = false
 	_adjust_camera()
 
@@ -53,10 +55,15 @@ func _physics_process(delta):
 	$GUI.set_pushes(stats['pushes'])
 
 func _unhandled_input(event):
+	if event is InputEventKey and help_menu_is_shown:
+		$GUI.hide_help_menu()
+		help_menu_is_shown = false
 	if event.is_action_pressed("quit"):
 		get_tree().quit(0)
-	#elif event.is_action_pressed("ui_undo"):
-#		level.undo()
+	if event.is_action_pressed("ui_help"):
+		if not help_menu_is_shown:
+			$GUI.show_help_menu()
+			help_menu_is_shown = true
 	elif event.is_action_pressed("ui_reset"):
 		_load_new_level(level_id)
 	elif event.is_action_pressed("ui_prev_level"):

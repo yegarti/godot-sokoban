@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var undo_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/UndoButton/TextureButton
+onready var help_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/HelpButton/TextureButton
 onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/ResetButton/TextureButton
 onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/PrevLevelButton/TextureButton
 onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/NextLevelButton/TextureButton
@@ -10,14 +10,12 @@ onready var moves_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMi
 onready var pushes_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/PushesContainer/PushesLabel
 onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelPackLabel
 onready var level_completed_message = $Control/LevelCompletedMessage
-
-signal undo_pressed
-signal reset_pressed
+onready var help_menu = $Control/Instructions
 
 const LEVEL_COMPLETED_TWEEN_DURATION = 1
 
 func _ready():
-	undo_button.connect("button_down", self, "_send_input_action", ["ui_undo"])
+	help_button.connect("button_down", self, "_send_input_action", ["ui_help"])
 	reset_button.connect("button_down", self, "_send_input_action", ["ui_reset"])
 	prev_level_button.connect("button_down", self, "_send_input_action", ["ui_prev_level"])
 	next_level_button.connect("button_down", self, "_send_input_action", ["ui_next_level"])
@@ -48,6 +46,7 @@ func _send_input_action(action):
 	ev.pressed = true
 	Input.parse_input_event(ev)
 	ev.pressed = false
+	Input.parse_input_event(ev)
 
 func get_size():
 	return Vector2($Control/MarginContainer.rect_size.x, $Control/MarginContainer.rect_size.y)
@@ -63,3 +62,9 @@ func show_level_completed_label(slow = false):
 
 func hide_level_completed_label(slow = false):
 	self.level_completed_message.hide_msg(Globals.LVL_DONE_MESSAGE_VISIBLE_TIME if slow else 0)
+
+func show_help_menu():
+	self.help_menu.visible = true
+
+func hide_help_menu():
+	self.help_menu.visible = false
