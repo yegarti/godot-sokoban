@@ -7,6 +7,8 @@ var level_completed = false
 onready var level_parser = load("res://utils/LevelParser.gd").new()
 const TAG = "Game"
 
+var _delay_from_last_undo = 0
+
 onready var width = get_viewport().size.x
 onready var height = get_viewport().size.y
 onready var visible_height = height - $GUI.get_size().y
@@ -43,14 +45,18 @@ func _load_new_level(level_id: int):
 
 func _physics_process(delta):
 	var stats = level.get_stats()
+	_delay_from_last_undo += delta
+	if Input.is_action_pressed("ui_undo") and _delay_from_last_undo > Globals.CONTINUES_MOVEMENT_DELAY:
+		level.undo()
+		_delay_from_last_undo = 0
 	$GUI.set_moves(stats['moves'])
 	$GUI.set_pushes(stats['pushes'])
 
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
 		get_tree().quit(0)
-	elif event.is_action_pressed("ui_undo"):
-		level.undo()
+	#elif event.is_action_pressed("ui_undo"):
+#		level.undo()
 	elif event.is_action_pressed("ui_reset"):
 		_load_new_level(level_id)
 	elif event.is_action_pressed("ui_prev_level"):

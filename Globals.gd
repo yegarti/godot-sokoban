@@ -3,6 +3,7 @@ extends Node
 const TILE_SIZE = 64
 const MOVE_DURATION = 0.03
 const LVL_DONE_MESSAGE_VISIBLE_TIME = 1
+const CONTINUES_MOVEMENT_DELAY = 0.2
 const LEVELS_PATH = "res://levels/"
 
 var curr_level_pack_file = "res://levels/basic.txt"

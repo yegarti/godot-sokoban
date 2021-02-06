@@ -14,7 +14,6 @@ var inputs = {
 
 onready var helper = load("res://utils/Helper.gd").new()
 
-const INPUT_DELAY = 0.2
 var _delay_from_last_input = 0
 
 var curr_animation = "move_down"
@@ -38,7 +37,7 @@ func get_input():
 		if Input.is_action_just_pressed(dir):
 			move(inputs[dir])
 			_delay_from_last_input = 0
-		elif Input.is_action_pressed(dir) and _delay_from_last_input > INPUT_DELAY:
+		elif Input.is_action_pressed(dir) and _delay_from_last_input > Globals.CONTINUES_MOVEMENT_DELAY:
 			move(inputs[dir])
 			_delay_from_last_input = 0
 
