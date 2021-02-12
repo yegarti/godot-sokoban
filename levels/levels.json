@@ -1,0 +1,36 @@
+[
+	{
+		"name": "Basics",
+		"file_name": "basics.txt",
+		"author": "Yehuda Garti, yeudag@gmail.com",
+		"number_of_levels": 4,
+		"enabled": true
+	},
+	{
+		"name": "Original + Extra",
+		"file_name": "original_+_extra.txt",
+		"number_of_levels": 90,
+		"enabled": true
+	},
+	{
+		"name": "Sasquatch",
+		"file_name": "sasquatch.txt",
+		"author": "David Skinner, sasquatch@bentonrea.com",
+		"number_of_levels": 50,
+		"enabled": true
+	},
+	{
+		"name": "Micro Cosmos",
+		"file_name": "micro_cosmos.txt",
+		"author": "Aymeric du Peloux, aymeric.dupeloux@smile.fr",
+		"number_of_levels": 40,
+		"enabled": true
+	},
+	{
+		"name": "Mini Cosmos",
+		"file_name": "mini_cosmos.txt",
+		"author": "Aymeric du Peloux, aymeric.dupeloux@smile.fr",
+		"number_of_levels": 40,
+		"enabled": true
+	}
+]

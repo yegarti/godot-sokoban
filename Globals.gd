@@ -16,13 +16,16 @@ func _ready():
 	
 
 func _find_all_level_packs():
-	var dir = Directory.new()
-	dir.open(LEVELS_PATH)
-	dir.list_dir_begin()
-	while true:
-		var file = dir.get_next()
-		if file == "":
-			break
-		elif file.ends_with(".txt"):
-			level_packs.append(LEVELS_PATH + file)
-	dir.list_dir_end()
+	var levels_json = Globals.LEVELS_PATH + "/levels.json"
+	var file = File.new()
+	file.open(levels_json, File.READ)
+	var levels_data = JSON.parse(file.get_as_text())
+	file.close()
+	assert(true, typeof(levels_data.result) == TYPE_ARRAY)
+	for level_pack in levels_data.result:
+		var level_pack_info = LevelPackInfo.new(
+			level_pack["name"],
+			Globals.LEVELS_PATH + "/" + level_pack["file_name"],
+			level_pack["number_of_levels"]
+			)
+		level_packs.append(level_pack_info)
