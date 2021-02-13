@@ -7,7 +7,7 @@ var game_scene = preload("res://Game.tscn")
 var level_button_scene = preload("res://ui/GameButton.tscn")
 
 func _ready():
-	for level_pack_info in Globals.level_packs:
+	for level_pack_info in Globals.level_packs.values():
 		add_level_pack(level_pack_info)
 
 func add_level_pack(level_pack_info):
@@ -18,13 +18,11 @@ func add_level_pack(level_pack_info):
 	level_button.set_custom_minimum_size(Vector2(250, 57))
 	level_button.text = level_pack_info.name
 	level_button.get_node("TextureButton").connect("button_down", self,
-		"_load_level_action", [level_pack_info.name, level_pack_info.path])
+		"_load_level_action", [level_pack_info])
 	level_container.add_child(level_button)
 
-func _load_level_action(level_pack_name, level_pack_path):
+func _load_level_action(level_pack_info):
 	queue_free()
-	Logger.info("Loading level pack: '%s'" % level_pack_name, TAG)
-
-	Globals.curr_level_pack_file = level_pack_path
-	Globals.curr_level_pack_name = level_pack_name
+	Logger.info("Loading level pack: '%s'" % level_pack_info.name, TAG)
+	Globals.current_level_pack = level_pack_info
 	get_tree().change_scene_to(game_scene)

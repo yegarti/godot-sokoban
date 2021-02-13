@@ -14,9 +14,8 @@ func get_level(level_id: int):
 
 func _init():
 	var file = File.new()
-	file.open(Globals.curr_level_pack_file, File.READ)
+	file.open(Globals.current_level_pack.path, File.READ)
 	var lines = []
-	#var level_number = 0
 	var raw_levels = []
 	while not file.eof_reached():
 		var line = file.get_line()

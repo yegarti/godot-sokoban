@@ -6,9 +6,8 @@ const LVL_DONE_MESSAGE_VISIBLE_TIME = 1
 const CONTINUES_MOVEMENT_DELAY = 0.2
 const LEVELS_PATH = "res://levels/"
 
-var curr_level_pack_file = "res://levels/basic.txt"
-var curr_level_pack_name = "Basics"
-onready var level_packs = []
+var current_level_pack
+onready var level_packs = {}
 
 func _ready():
 	Logger.set_default_output_level(Logger.DEBUG)
@@ -28,4 +27,4 @@ func _find_all_level_packs():
 			Globals.LEVELS_PATH + "/" + level_pack["file_name"],
 			level_pack["number_of_levels"]
 			)
-		level_packs.append(level_pack_info)
+		level_packs[level_pack_info.name] = level_pack_info
