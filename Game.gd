@@ -16,7 +16,7 @@ onready var visible_height = height - $GUI.get_size().y
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_load_new_level(level_id)
+	_load_new_level(Globals.current_level_id)
 
 func _on_level_pack_selected(level_pack):
 	level_parser.set_level_pack(level_pack)

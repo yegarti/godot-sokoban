@@ -7,11 +7,14 @@ const CONTINUES_MOVEMENT_DELAY = 0.2
 const LEVELS_PATH = "res://levels/"
 
 var current_level_pack
+var current_level_id = 1
+
 onready var level_packs = {}
 
 func _ready():
 	Logger.set_default_output_level(Logger.DEBUG)
 	_find_all_level_packs()
+	
 	
 
 func _find_all_level_packs():
@@ -25,6 +28,7 @@ func _find_all_level_packs():
 		var level_pack_info = LevelPackInfo.new(
 			level_pack["name"],
 			Globals.LEVELS_PATH + "/" + level_pack["file_name"],
+			level_pack.get("author", ""),
 			level_pack["number_of_levels"]
 			)
 		level_packs[level_pack_info.name] = level_pack_info
