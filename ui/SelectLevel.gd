@@ -1,5 +1,7 @@
 extends MarginContainer
 
+signal change_scene(scene_type)
+
 onready var level_container = $VBoxContainer/ScrollContainer/CenterContainer/LevelContainer
 const TAG = "SelectLevel"
 var select_level_scene = preload("res://ui/LevelSelect.tscn")
@@ -24,4 +26,4 @@ func _load_level_action(level_pack_info):
 	queue_free()
 	Logger.info("Loading level pack: '%s'" % level_pack_info.name, TAG)
 	Globals.current_level_pack = level_pack_info
-	get_tree().change_scene_to(select_level_scene)
+	emit_signal("change_scene", Globals.SceneType.SelectLevel)

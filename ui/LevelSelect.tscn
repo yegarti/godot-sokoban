@@ -1,12 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/LevelSelect.gd" type="Script" id=2]
 [ext_resource path="res://ui/MainMenu.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/LevelButton_Hover.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/LevelButton_Pressed.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui/LevelButton_Normal.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/LevelSelect_Button_Font.tres" type="DynamicFont" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 22
@@ -55,31 +51,9 @@ custom_constants/margin_top = 50
 margin_top = 50.0
 margin_right = 1206.0
 margin_bottom = 50.0
-custom_constants/vseparation = 10
-custom_constants/hseparation = 10
-columns = 15
+custom_constants/vseparation = 11
+custom_constants/hseparation = 11
+columns = 17
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="MarginContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 130.0
-margin_right = 1206.0
-margin_bottom = 728.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 2
-
-[node name="BackButton" type="Button" parent="VBoxContainer/MarginContainer"]
-margin_top = 552.0
-margin_right = 100.0
-margin_bottom = 598.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/normal = ExtResource( 6 )
-custom_fonts/font = ExtResource( 7 )
-custom_constants/hseparation = 0
-text = "Back"

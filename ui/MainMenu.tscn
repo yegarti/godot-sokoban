@@ -1,12 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://ui/SelectLevel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/Instructions.tscn" type="PackedScene" id=3]
-
-[sub_resource type="DynamicFont" id=1]
-size = 42
-font_data = ExtResource( 1 )
+[ext_resource path="res://styles/style_button_hover.tres" type="StyleBox" id=1]
+[ext_resource path="res://styles/font_main_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://styles/style_button_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/style_button_pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://styles/font_button.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/MainMenu.gd" type="Script" id=6]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchor_right = 1.0
@@ -15,6 +14,7 @@ custom_constants/margin_right = 40
 custom_constants/margin_top = 40
 custom_constants/margin_left = 40
 custom_constants/margin_bottom = 40
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -25,29 +25,81 @@ margin_top = 40.0
 margin_right = 1326.0
 margin_bottom = 728.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer"]
 margin_right = 1286.0
-margin_bottom = 52.0
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
 text = "Sokoban"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 56.0
+[node name="MenuContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 84.0
 margin_right = 1286.0
-margin_bottom = 688.0
-size_flags_vertical = 3
+margin_bottom = 534.0
+custom_constants/margin_right = 510
+custom_constants/margin_top = 100
+custom_constants/margin_left = 510
 
-[node name="SelectLevel" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 641.0
-margin_bottom = 632.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MenuContainer"]
+margin_left = 510.0
+margin_top = 100.0
+margin_right = 776.0
+margin_bottom = 450.0
+custom_constants/separation = 10
+
+[node name="Play" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
+margin_right = 266.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 5 )
+text = "Play"
 
-[node name="Instructions" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 645.0
-margin_right = 1286.0
-margin_bottom = 632.0
+[node name="Options" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
+margin_top = 90.0
+margin_right = 266.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 5 )
+text = "Options"
+
+[node name="Help" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
+margin_top = 180.0
+margin_right = 266.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 5 )
+text = "Help"
+
+[node name="Exit" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
+margin_top = 270.0
+margin_right = 266.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = ExtResource( 5 )
+text = "Exit"
+[connection signal="pressed" from="VBoxContainer/MenuContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuContainer/VBoxContainer/Help" to="." method="_on_Help_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

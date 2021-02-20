@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="sokoban"
-run/main_scene="res://ui/MainMenu.tscn"
+run/main_scene="res://ui/ContainerMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

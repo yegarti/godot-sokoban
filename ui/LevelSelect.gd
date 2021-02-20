@@ -1,10 +1,11 @@
 extends MarginContainer
 
 onready var levels_container = $VBoxContainer/LevelsContainer/GridContainer
+signal change_scene(scene_type)
 
 const TAG = "LevelSelect"
 
-var game_scene = preload("res://Game.tscn")
+
 var _button_font_style = preload("res://ui/LevelButton_Font.tres")
 var _button_styles = {
 	"new": {
@@ -42,7 +43,6 @@ func _create_new_button(lvl_id, state):
 	levels_container.add_child(button)
 
 func _load_selected_level(lvl_id):
-	queue_free()
 	Logger.info("Loading level: '%d'" % lvl_id, TAG)
 	Globals.current_level_id = lvl_id - 1
-	get_tree().change_scene_to(game_scene)
+	emit_signal("change_scene", Globals.SceneType.Game)

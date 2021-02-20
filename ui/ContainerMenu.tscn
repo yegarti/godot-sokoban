@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://styles/style_button_hover.tres" type="StyleBox" id=1]
+[ext_resource path="res://styles/style_button_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://styles/style_button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://styles/font_button.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/ContainerMenu.gd" type="Script" id=5]
+
+[node name="MainContainer" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SceneContainer" type="MarginContainer" parent="."]
+margin_right = 1366.0
+margin_bottom = 678.0
+size_flags_vertical = 3
+
+[node name="ButtonContainer" type="MarginContainer" parent="."]
+margin_top = 682.0
+margin_right = 1366.0
+margin_bottom = 768.0
+custom_constants/margin_right = 80
+custom_constants/margin_top = 20
+custom_constants/margin_left = 80
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="ButtonContainer"]
+margin_left = 80.0
+margin_top = 20.0
+margin_right = 180.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 0
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "Back"

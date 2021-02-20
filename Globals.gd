@@ -9,6 +9,8 @@ const LEVELS_PATH = "res://levels/"
 var current_level_pack
 var current_level_id = 1
 
+enum SceneType {SelectPack, Help, Quit, Main, SelectLevel, Game}
+
 onready var level_packs = {}
 
 func _ready():
@@ -16,7 +18,6 @@ func _ready():
 	_find_all_level_packs()
 	
 	
-
 func _find_all_level_packs():
 	var levels_json = Globals.LEVELS_PATH + "/levels.json"
 	var file = File.new()

@@ -1,5 +1,7 @@
 extends Node2D
-var main_menu_scene = load("res://ui/MainMenu.tscn")
+
+signal change_scene(scene_type)
+
 var level = null
 var level_id = 0
 var level_scene = preload("res://objects/Level.tscn")
@@ -14,13 +16,8 @@ onready var width = get_viewport().size.x
 onready var height = get_viewport().size.y
 onready var visible_height = height - $GUI.get_size().y
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	_load_new_level(Globals.current_level_id)
-
-func _on_level_pack_selected(level_pack):
-	level_parser.set_level_pack(level_pack)
-	_load_new_level(0)
 
 func _on_Level_completed():
 	if not level_completed:
@@ -30,6 +27,7 @@ func _on_Level_completed():
 		Logger.info("Level completed!", TAG)
 
 func _load_new_level(level_id: int):
+	self.level_id = level_id
 	$GUI.show()
 	if level:
 		level.queue_free()
@@ -86,5 +84,4 @@ func _adjust_camera():
 
 func _load_main_menu():
 	Logger.info("Changing scene to main menu")
-	queue_free()
-	get_tree().change_scene_to(main_menu_scene)
+	emit_signal("change_scene", Globals.SceneType.Main)
