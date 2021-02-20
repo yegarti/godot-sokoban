@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "MarginContainer",
 "class": "CustomButton",
 "language": "GDScript",
-"path": "res://ui/CustomButton.gd"
+"path": "res://scenes/ui/CustomButton.gd"
 }, {
 "base": "Reference",
 "class": "Helper",
@@ -63,13 +63,13 @@ _global_script_class_icons={
 [application]
 
 config/name="sokoban"
-run/main_scene="res://ui/ContainerMenu.tscn"
+run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Globals="*res://Globals.gd"
-Logger="*res://logger.gd"
+Logger="*res://utils/logger.gd"
 
 [display]
 

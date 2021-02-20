@@ -4,8 +4,7 @@ signal change_scene(scene_type)
 
 onready var level_container = $VBoxContainer/ScrollContainer/CenterContainer/LevelContainer
 const TAG = "SelectLevel"
-var select_level_scene = preload("res://ui/LevelSelect.tscn")
-var level_button_scene = preload("res://ui/GameButton.tscn")
+var level_button_scene = preload("res://scenes/ui/GameButton.tscn")
 
 func _ready():
 	for level_pack_info in Globals.level_packs.values():

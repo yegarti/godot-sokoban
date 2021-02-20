@@ -5,7 +5,7 @@
 [ext_resource path="res://styles/style_button_normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://styles/style_button_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://styles/font_button.tres" type="DynamicFont" id=5]
-[ext_resource path="res://ui/MainMenu.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/MainMenu.gd" type="Script" id=6]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchor_right = 1.0

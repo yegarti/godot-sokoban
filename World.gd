@@ -8,11 +8,11 @@ onready var scene_container = $SceneContainer
 var back_queue = []
 
 var scenes = {
-	Globals.SceneType.Main: preload("res://ui/MainMenu.tscn"),
-	Globals.SceneType.Help: preload("res://ui/Instructions.tscn"),
-	Globals.SceneType.SelectPack: preload("res://ui/SelectLevel.tscn"),
-	Globals.SceneType.SelectLevel: preload("res://ui/LevelSelect.tscn"),
-	Globals.SceneType.Game: preload("res://Game.tscn"),
+	Globals.SceneType.Main: preload("res://scenes/ui/MainMenu.tscn"),
+	Globals.SceneType.Help: preload("res://scenes/ui/Help.tscn"),
+	Globals.SceneType.SelectPack: preload("res://scenes/ui/SelectPack.tscn"),
+	Globals.SceneType.SelectLevel: preload("res://scenes/ui/SelectLevel.tscn"),
+	Globals.SceneType.Game: preload("res://scenes/Game.tscn"),
 }
 
 func _ready():

@@ -6,12 +6,12 @@ signal change_scene(scene_type)
 const TAG = "LevelSelect"
 
 
-var _button_font_style = preload("res://ui/LevelButton_Font.tres")
+var _button_font_style = preload("res://styles/font_button.tres")
 var _button_styles = {
 	"new": {
-		"normal": preload("res://ui/LevelButton_Normal.tres"),
-		"hover": preload("res://ui/LevelButton_Hover.tres"),
-		"pressed": preload("res://ui/LevelButton_Pressed.tres"),
+		"normal": preload("res://styles/style_button_normal.tres"),
+		"hover": preload("res://styles/style_button_hover.tres"),
+		"pressed": preload("res://styles/style_button_pressed.tres"),
 	},
 	"done": {
 	}
