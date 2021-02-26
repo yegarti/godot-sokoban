@@ -68,8 +68,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Globals.gd"
 Logger="*res://utils/logger.gd"
+Globals="*res://Globals.gd"
+UserData="*res://UserData.gd"
 
 [display]
 
@@ -107,10 +108,6 @@ ui_down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
-quit={
-"deadzone": 0.5,
-"events": [  ]
-}
 ui_undo={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
@@ -139,6 +136,11 @@ ui_main_menu={
 ui_help={
 "deadzone": 0.5,
 "events": [  ]
+}
+ui_back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777220,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [layer_names]

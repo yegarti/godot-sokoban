@@ -5,17 +5,11 @@ signal change_scene(scene_type)
 
 const TAG = "LevelSelect"
 
-
-var _button_font_style = preload("res://styles/font_button.tres")
-var _button_styles = {
-	"new": {
-		"normal": preload("res://styles/style_button_normal.tres"),
-		"hover": preload("res://styles/style_button_hover.tres"),
-		"pressed": preload("res://styles/style_button_pressed.tres"),
-	},
-	"done": {
-	}
+var _level_status_to_color = {
+	UserData.LevelStatus.New: "blue",
+	UserData.LevelStatus.Finished: "green",
 }
+
 var _button_size = Vector2(60, 60)
 
 func _ready():
@@ -29,20 +23,28 @@ func _ready():
 		else:
 			$VBoxContainer/AuthorLabel.text = "  "
 		for i in range(Globals.current_level_pack.number_of_levels):
-			_create_new_button(i+1, "new")
+			_create_new_button(i, "new")
 
 
 func _create_new_button(lvl_id, state):
 	var button = Button.new()
-	for style_name in _button_styles[state]:
-		button.set('custom_styles/%s' % style_name, _button_styles[state][style_name])
-	button.set('custom_fonts/font', _button_font_style)
+	var button_color = _level_status_to_color[UserData.LevelStatus.New]
+	
+	# no global variable when running scene as stand alone
+	if Globals.current_level_pack:
+		var level_status = UserData.get_level_status(Globals.current_level_pack.id, lvl_id)
+		button_color = _level_status_to_color[level_status]
+
+	Globals.set_button_style(button, button_color)
+
 	button.rect_min_size = _button_size
-	button.text = str(lvl_id)
-	button.connect("button_down", self, "_load_selected_level", [lvl_id])
+	button.text = str(lvl_id + 1)
+	button.connect("pressed", self, "_load_selected_level", [lvl_id])
 	levels_container.add_child(button)
+	
+
 
 func _load_selected_level(lvl_id):
 	Logger.info("Loading level: '%d'" % lvl_id, TAG)
-	Globals.current_level_id = lvl_id - 1
+	Globals.current_level_id = lvl_id
 	emit_signal("change_scene", Globals.SceneType.Game)

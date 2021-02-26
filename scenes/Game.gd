@@ -25,6 +25,11 @@ func _on_Level_completed():
 		$GUI.show_level_completed_label(true)
 		$GUI.show_level_completed_mark()
 		Logger.info("Level completed!", TAG)
+		UserData.set_level_data(Globals.current_level_pack.id,
+								level_id,
+								UserData.LevelStatus.Finished,
+								level.get_stats()['moves'])
+		UserData.save_game()
 
 func _load_new_level(level_id: int):
 	self.level_id = level_id

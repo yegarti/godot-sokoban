@@ -9,8 +9,6 @@
 [ext_resource path="res://assets/ui/PNG/green_checkmark.png" type="Texture" id=7]
 [ext_resource path="res://scenes/ui/Help.tscn" type="PackedScene" id=8]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
 
