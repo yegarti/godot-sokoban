@@ -15,7 +15,7 @@ var _button_size = Vector2(60, 60)
 func _ready():
 	if not Globals.current_level_pack:
 		for i in range(20):
-			_create_new_button(str(i+1), "new")
+			_create_new_button(str(i+1))
 	else:
 		$VBoxContainer/TitleLabel.text = "%s Levels" % Globals.current_level_pack.name
 		if Globals.current_level_pack.author:
@@ -23,16 +23,18 @@ func _ready():
 		else:
 			$VBoxContainer/AuthorLabel.text = "  "
 		for i in range(Globals.current_level_pack.number_of_levels):
-			_create_new_button(i, "new")
+			_create_new_button(i)
+	if levels_container.get_child_count() > 0:
+		levels_container.get_child(0).grab_focus()
 
 
-func _create_new_button(lvl_id, state):
+func _create_new_button(lvl_id):
 	var button = Button.new()
 	var button_color = _level_status_to_color[UserData.LevelStatus.New]
 	
 	# no global variable when running scene as stand alone
 	if Globals.current_level_pack:
-		var level_status = UserData.get_level_status(Globals.current_level_pack.id, lvl_id)
+		var level_status = UserData.get_level_data(Globals.current_level_pack.id, lvl_id)['status']
 		button_color = _level_status_to_color[level_status]
 
 	Globals.set_button_style(button, button_color)

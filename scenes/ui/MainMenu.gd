@@ -1,8 +1,5 @@
 extends MarginContainer
 
-signal scene_exit
-signal scene_help
-signal scene_play
 signal change_scene(scene_type)
 
 func _ready():

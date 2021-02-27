@@ -76,7 +76,6 @@ func set_button_style(button: Button, color: String):
 		Logger.error("No button style for color: " + str(color))
 		return
 
-	print(color)
 	for style_name in _button_colors[color]:
 		var style_colors = _button_colors[color][style_name]
 		var stbox = _button_styles[style_name].duplicate()
@@ -86,3 +85,5 @@ func set_button_style(button: Button, color: String):
 			stbox.set_border_color(style_colors["border_color"])
 		button.set('custom_styles/%s' % style_name, stbox)
 
+
+# func set_label_style(label: Label, )

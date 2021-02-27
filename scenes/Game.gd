@@ -6,6 +6,7 @@ var level = null
 var level_id = 0
 var level_scene = preload("res://objects/Level.tscn")
 var level_completed = false
+var level_data
 onready var level_parser = load("res://utils/LevelParser.gd").new()
 const TAG = "Game"
 
@@ -31,8 +32,9 @@ func _on_Level_completed():
 								level.get_stats()['moves'])
 		UserData.save_game()
 
-func _load_new_level(level_id: int):
-	self.level_id = level_id
+func _load_new_level(lvl_id: int):
+	self.level_id = lvl_id
+	level_data = UserData.get_level_data(Globals.current_level_pack.id, level_id)
 	$GUI.show()
 	if level:
 		level.queue_free()
@@ -40,10 +42,13 @@ func _load_new_level(level_id: int):
 	level.initialize(level_parser.get_level(level_id))
 	add_child(level)
 	level.connect("level_completed", self, "_on_Level_completed")
-	$GUI.set_level_name("Level " + str(level_id + 1))
+	$GUI.set_level_name("Level " + str(lvl_id + 1))
 	$GUI.set_level_pack_name(Globals.current_level_pack.name)
 	$GUI.hide_level_completed_label()
-	$GUI.hide_level_completed_mark()
+	if level_data['status'] == UserData.LevelStatus.Finished:
+		$GUI.show_level_completed_mark()
+	else:
+		$GUI.hide_level_completed_mark()
 	$GUI.hide_help_menu()
 	level_completed = false
 	_adjust_camera()

@@ -9,7 +9,7 @@ var _str_to_status = {
 	"finished": LevelStatus.Finished,
 }
 var _status_to_str = {
-	LevelStatus.New: "str",
+	LevelStatus.New: "new",
 	LevelStatus.InProgress: "in_progress",
 	LevelStatus.Finished: "finished",
 }
@@ -53,6 +53,8 @@ func save_game():
 	save_file.store_line(to_json(level_save_data))
 	save_file.close()
 
-func get_level_status(pack_id, level_id):
-	return _str_to_status[level_save_data.get(pack_id, {}).get(str(level_id), {}).get("status", "new")]
-	
+func get_level_data(pack_id, level_id):
+	_verify_exists(pack_id, level_id)
+	var res = level_save_data[pack_id][str(level_id)].duplicate()
+	res['status'] = _str_to_status[res['status']]
+	return res
