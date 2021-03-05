@@ -5,12 +5,30 @@ signal change_scene(scene_type)
 onready var level_container = $VBoxContainer/ScrollContainer/CenterContainer/LevelContainer
 const TAG = "SelectLevel"
 var _button_size = Vector2(1, 60)
+var level_packs = {}
 
 func _ready():
-	for level_pack_info in Globals.level_packs.values():
+	_find_all_level_packs()
+	for level_pack_info in level_packs.values():
 		add_level_pack(level_pack_info)
 	if level_container.get_child_count() > 0:
 		level_container.get_child(0).grab_focus()
+
+func _find_all_level_packs():
+	var levels_json = Globals.LEVELS_METADATA_JSON
+	var file = File.new()
+	file.open(levels_json, File.READ)
+	var levels_data = JSON.parse(file.get_as_text())
+	file.close()
+	assert(true, typeof(levels_data.result) == TYPE_ARRAY)
+	for level_pack in levels_data.result:
+		var level_pack_info = LevelPackInfo.new(
+			level_pack["id"],
+			level_pack["name"],
+			Globals.LEVELS_PATH + "/" + level_pack["file_name"],
+			level_pack.get("author", ""),
+			level_pack["number_of_levels"])
+		level_packs[level_pack_info.name] = level_pack_info
 
 func add_level_pack(level_pack_info):
 	Logger.debug("Adding level pack '%s' with %d levels at %s" % 

@@ -5,11 +5,13 @@ const MOVE_DURATION = 0.03
 const LVL_DONE_MESSAGE_VISIBLE_TIME = 1
 const CONTINUES_MOVEMENT_DELAY = 0.2
 const LEVELS_PATH = "res://levels/"
-var current_level_pack
-var current_level_id = 1
+const LEVELS_METADATA_JSON = "res://levels/levels.json"
 const DEFAULT_LOG_LEVEL = Logger.DEBUG
 
 enum SceneType {SelectPack, Help, Quit, Main, SelectLevel, Game}
+
+var current_level_pack
+var current_level_id = 1
 
 var _button_font_style = preload("res://styles/font_button.tres")
 var _button_styles = {
@@ -47,28 +49,9 @@ var _button_colors = {
 		}
 	}
 }
-onready var level_packs = {}
 
 func _ready():
 	Logger.set_default_output_level(DEFAULT_LOG_LEVEL)
-	_find_all_level_packs()
-
-func _find_all_level_packs():
-	var levels_json = Globals.LEVELS_PATH + "/levels.json"
-	var file = File.new()
-	file.open(levels_json, File.READ)
-	var levels_data = JSON.parse(file.get_as_text())
-	file.close()
-	assert(true, typeof(levels_data.result) == TYPE_ARRAY)
-	for level_pack in levels_data.result:
-		var level_pack_info = LevelPackInfo.new(
-			level_pack["id"],
-			level_pack["name"],
-			Globals.LEVELS_PATH + "/" + level_pack["file_name"],
-			level_pack.get("author", ""),
-			level_pack["number_of_levels"])
-		level_packs[level_pack_info.name] = level_pack_info
-
 
 func set_button_style(button: Button, color: String):
 	button.set('custom_fonts/font', _button_font_style)
@@ -85,6 +68,3 @@ func set_button_style(button: Button, color: String):
 		if style_colors.has("border_color"):
 			stbox.set_border_color(style_colors["border_color"])
 		button.set('custom_styles/%s' % style_name, stbox)
-
-
-# func set_label_style(label: Label, )

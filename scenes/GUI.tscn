@@ -240,7 +240,7 @@ margin_right = 1306.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 
-[node name="HighScore" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight"]
+[node name="HighScoreLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight"]
 margin_right = 433.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
@@ -249,13 +249,13 @@ text = "High Score"
 align = 1
 valign = 1
 
-[node name="LevelPackLabel2" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight"]
+[node name="ScoreLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight"]
 margin_top = 40.0
 margin_right = 433.0
 margin_bottom = 59.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 3 )
-text = "120 moves"
+text = "999 moves"
 align = 1
 valign = 1
 
