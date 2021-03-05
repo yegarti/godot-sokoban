@@ -12,6 +12,8 @@ onready var pushes_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxM
 onready var level_pack_name_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelPackLabel
 onready var level_completed_message = $Control/LevelCompletedMessage
 onready var help_menu = $Control/Instructions
+onready var high_score_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/ScoreLabel
+onready var score_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/HighScoreLabel
 
 const LEVEL_COMPLETED_TWEEN_DURATION = 1
 
@@ -71,6 +73,11 @@ func show_help_menu():
 func hide_help_menu():
 	self.help_menu.visible = false
 
+func set_high_score(high_score):
+	self.high_score_label.visible = true
+	self.score_label.text = "High Score"
+	self.high_score_label.text = "%s moves" % str(high_score)
 
-func _on_HelpButton_pressed():
-	pass # Replace with function body.
+func hide_high_score():
+	self.score_label.text = "No High Score"
+	self.high_score_label.visible = false

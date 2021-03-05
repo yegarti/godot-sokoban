@@ -1,6 +1,7 @@
 extends Node
 
 const SAVE_PATH = "user://levels_progress.json"
+const TAG = "UserData"
 
 enum LevelStatus {New, InProgress, Finished}
 var _str_to_status = {
@@ -28,23 +29,21 @@ func _load_game():
 		return
 
 	save_file.open(SAVE_PATH, File.READ)
-	print(save_file.get_path_absolute())
+	Logger.debug("Using file: %s" % save_file.get_path_absolute(), TAG)
 	level_save_data = JSON.parse(save_file.get_as_text()).result
 	save_file.close()
-
-	print(level_save_data)
 
 func _verify_exists(pack_id, level_id):
 	if not level_save_data.has(pack_id):
 		level_save_data[pack_id] = {}
 	if not level_save_data[pack_id].has(str(level_id)):
-		level_save_data[pack_id][str(level_id)] = {"status": _status_to_str[LevelStatus.New], "score": 0}
+		level_save_data[pack_id][str(level_id)] = {"status": _status_to_str[LevelStatus.New], "score": 9999}
 
 func set_level_data(pack_id, level_id, status = null, score = null):
 	_verify_exists(pack_id, level_id)
 	if status:
 		level_save_data[pack_id][str(level_id)]["status"] = _status_to_str[status]
-	if score:
+	if score and score < level_save_data[pack_id][str(level_id)]["score"]:
 		level_save_data[pack_id][str(level_id)]["score"] = score
 
 func save_game():

@@ -26,10 +26,13 @@ func _on_Level_completed():
 		$GUI.show_level_completed_label(true)
 		$GUI.show_level_completed_mark()
 		Logger.info("Level completed!", TAG)
+		var moves = level.get_stats()['moves']
+		if moves < level_data['score']:
+			$GUI.set_high_score(moves)
 		UserData.set_level_data(Globals.current_level_pack.id,
 								level_id,
 								UserData.LevelStatus.Finished,
-								level.get_stats()['moves'])
+								moves)
 		UserData.save_game()
 
 func _load_new_level(lvl_id: int):
@@ -47,8 +50,11 @@ func _load_new_level(lvl_id: int):
 	$GUI.hide_level_completed_label()
 	if level_data['status'] == UserData.LevelStatus.Finished:
 		$GUI.show_level_completed_mark()
+		if level_data.has('score'):
+			$GUI.set_high_score(level_data['score'])
 	else:
 		$GUI.hide_level_completed_mark()
+		$GUI.hide_high_score()
 	$GUI.hide_help_menu()
 	level_completed = false
 	_adjust_camera()
