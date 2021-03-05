@@ -1,9 +1,10 @@
 extends CanvasLayer
 
-onready var help_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/HelpButton/TextureButton
-onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/ResetButton/TextureButton
-onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/PrevLevelButton/TextureButton
-onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxRight/NextLevelButton/TextureButton
+onready var help_button := $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/HelpButton
+onready var reset_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/ResetButton
+onready var prev_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/PrevLevelButton
+onready var next_level_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/NextLevelButton
+onready var menu_button = $Control/MarginContainer/Elements/HBoxContainer/HBoxLeft/MenuButton
 onready var level_name_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelNameContainer/LevelLabel
 onready var level_name_checkmark = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo/LevelNameContainer/LevelCheckmark
 onready var moves_label = $Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/MovesContainer/MovesLabel
@@ -15,10 +16,11 @@ onready var help_menu = $Control/Instructions
 const LEVEL_COMPLETED_TWEEN_DURATION = 1
 
 func _ready():
-	help_button.connect("button_down", self, "_send_input_action", ["ui_help"])
-	reset_button.connect("button_down", self, "_send_input_action", ["ui_reset"])
-	prev_level_button.connect("button_down", self, "_send_input_action", ["ui_prev_level"])
-	next_level_button.connect("button_down", self, "_send_input_action", ["ui_next_level"])
+	help_button.connect("pressed", self, "_send_input_action", ["ui_help"])
+	reset_button.connect("pressed", self, "_send_input_action", ["ui_reset"])
+	prev_level_button.connect("pressed", self, "_send_input_action", ["ui_prev_level"])
+	next_level_button.connect("pressed", self, "_send_input_action", ["ui_next_level"])
+	menu_button.connect("pressed", self, "_send_input_action", ["ui_back"])
 
 func show():
 	$Control.visible = true
@@ -68,3 +70,7 @@ func show_help_menu():
 
 func hide_help_menu():
 	self.help_menu.visible = false
+
+
+func _on_HelpButton_pressed():
+	pass # Replace with function body.

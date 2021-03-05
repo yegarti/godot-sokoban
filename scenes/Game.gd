@@ -66,8 +66,6 @@ func _unhandled_input(event):
 	if event is InputEventKey and help_menu_is_shown:
 		$GUI.hide_help_menu()
 		help_menu_is_shown = false
-	if event.is_action_pressed("quit"):
-		get_tree().quit(0)
 	if event.is_action_pressed("ui_help"):
 		if not help_menu_is_shown:
 			$GUI.show_help_menu()
@@ -82,9 +80,6 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("ui_next_level"):
 		level_id = (level_id + 1) % level_parser.number_of_levels
 		_load_new_level(level_id)
-	elif event.is_action_pressed("ui_main_menu"):
-		_load_main_menu()
-		queue_free()
 
 func _adjust_camera():
 	$Camera2D.position = Vector2(level.width / 2, (level.height - (self.height - self.visible_height)) / 2)

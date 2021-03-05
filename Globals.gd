@@ -7,6 +7,7 @@ const CONTINUES_MOVEMENT_DELAY = 0.2
 const LEVELS_PATH = "res://levels/"
 var current_level_pack
 var current_level_id = 1
+const DEFAULT_LOG_LEVEL = Logger.DEBUG
 
 enum SceneType {SelectPack, Help, Quit, Main, SelectLevel, Game}
 
@@ -49,7 +50,7 @@ var _button_colors = {
 onready var level_packs = {}
 
 func _ready():
-	Logger.set_default_output_level(Logger.DEBUG)
+	Logger.set_default_output_level(DEFAULT_LOG_LEVEL)
 	_find_all_level_packs()
 
 func _find_all_level_packs():

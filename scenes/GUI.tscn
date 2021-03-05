@@ -1,29 +1,32 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/GUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/label_HP_bg.png" type="Texture" id=2]
-[ext_resource path="res://scenes/ui/GameButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://styles/icon_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://scenes/ui/LevelCompletedMessage.gd" type="Script" id=6]
 [ext_resource path="res://assets/ui/PNG/green_checkmark.png" type="Texture" id=7]
 [ext_resource path="res://scenes/ui/Help.tscn" type="PackedScene" id=8]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 4 )
+[ext_resource path="res://styles/style_button_hover.tres" type="StyleBox" id=9]
+[ext_resource path="res://styles/style_button_normal.tres" type="StyleBox" id=10]
+[ext_resource path="res://styles/style_button_pressed.tres" type="StyleBox" id=11]
 
 [sub_resource type="DynamicFont" id=2]
-size = 15
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 28
+size = 15
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 28
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 28
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
@@ -55,7 +58,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1346.0
-margin_bottom = 99.0
+margin_bottom = 100.0
 texture = ExtResource( 2 )
 patch_margin_left = 10
 patch_margin_right = 10
@@ -64,7 +67,7 @@ patch_margin_right = 10
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1346.0
-margin_bottom = 99.0
+margin_bottom = 100.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -77,40 +80,94 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1316.0
-margin_bottom = 69.0
+margin_bottom = 70.0
 
 [node name="HBoxLeft" type="HBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_right = 432.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 
-[node name="ResetButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft" instance=ExtResource( 3 )]
-size_flags_vertical = 0
-text = "reset"
+[node name="HelpButton" type="Button" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 0 )
+hint_tooltip = "Help"
+focus_mode = 0
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
+text = "f"
 
-[node name="HelpButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft" instance=ExtResource( 3 )]
-margin_left = 194.0
-margin_right = 384.0
-margin_bottom = 59.0
-text = "help"
+[node name="ResetButton" type="Button" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft"]
+margin_left = 64.0
+margin_right = 124.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 0 )
+hint_tooltip = "Reset"
+focus_mode = 0
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
+text = "b"
+
+[node name="PrevLevelButton" type="Button" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft"]
+margin_left = 128.0
+margin_right = 188.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 0 )
+hint_tooltip = "Previous Level"
+focus_mode = 0
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
+text = "c"
+
+[node name="NextLevelButton" type="Button" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft"]
+margin_left = 192.0
+margin_right = 252.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 0 )
+hint_tooltip = "Next Level"
+focus_mode = 0
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
+text = "d"
+
+[node name="MenuButton" type="Button" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxLeft"]
+margin_left = 256.0
+margin_right = 316.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 0 )
+hint_tooltip = "Menu"
+focus_mode = 0
+custom_styles/hover = ExtResource( 9 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
+text = "e"
 
 [node name="HBoxMiddle" type="HBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_left = 436.0
 margin_right = 869.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="PushesContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle"]
 margin_right = 122.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 
 [node name="PushesLabel" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/PushesContainer"]
 margin_top = 7.0
 margin_right = 122.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Pushes
 0"
 align = 1
@@ -118,7 +175,7 @@ align = 1
 [node name="VBoxLevelInfo" type="VBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle"]
 margin_left = 126.0
 margin_right = 306.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 180, 0 )
 size_flags_horizontal = 3
 
@@ -126,7 +183,7 @@ size_flags_horizontal = 3
 margin_right = 180.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Original + Extra"
 align = 1
 valign = 1
@@ -134,7 +191,7 @@ valign = 1
 [node name="LevelNameContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle/VBoxLevelInfo"]
 margin_top = 23.0
 margin_right = 180.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -145,7 +202,7 @@ __meta__ = {
 margin_right = 180.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Level 100"
 align = 1
 valign = 1
@@ -162,7 +219,7 @@ texture = ExtResource( 7 )
 [node name="MovesContainer" type="MarginContainer" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxMiddle"]
 margin_left = 310.0
 margin_right = 433.0
-margin_bottom = 59.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -172,29 +229,35 @@ __meta__ = {
 margin_top = 7.0
 margin_right = 123.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Moves
 0"
 align = 1
 
-[node name="HBoxRight" type="HBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
+[node name="HBoxRight" type="VBoxContainer" parent="Control/MarginContainer/Elements/HBoxContainer"]
 margin_left = 873.0
 margin_right = 1306.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="HighScore" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight"]
+margin_right = 433.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "High Score"
+align = 1
+valign = 1
+
+[node name="LevelPackLabel2" type="Label" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight"]
+margin_top = 40.0
+margin_right = 433.0
 margin_bottom = 59.0
 size_flags_horizontal = 3
-alignment = 2
-
-[node name="PrevLevelButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight" instance=ExtResource( 3 )]
-margin_left = 49.0
-margin_right = 239.0
-size_flags_vertical = 0
-text = "previous level"
-
-[node name="NextLevelButton" parent="Control/MarginContainer/Elements/HBoxContainer/HBoxRight" instance=ExtResource( 3 )]
-margin_left = 243.0
-margin_right = 433.0
-size_flags_vertical = 0
-text = "next level"
+custom_fonts/font = SubResource( 3 )
+text = "120 moves"
+align = 1
+valign = 1
 
 [node name="LevelCompletedMessage" type="MarginContainer" parent="Control"]
 anchor_top = 0.25
@@ -209,7 +272,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="Control/LevelCompletedMessage"]
 margin_right = 1366.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/line_spacing = 0
@@ -225,4 +288,5 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="Control/LevelCompletedMessage"]
 
 [node name="Instructions" parent="Control" instance=ExtResource( 8 )]
+visible = false
 custom_constants/margin_top = 250

@@ -35,6 +35,8 @@ func _load_scene(scene_type):
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
 		queue_free()
+	if event.is_action_pressed("ui_back"):
+		back()
 
 func change_scene(scene_type):
 	if scene_type == Globals.SceneType.Quit:
