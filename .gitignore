@@ -2,3 +2,4 @@
 TODO.md
 .vscode
 default_env.tres
+assets/**/*.import

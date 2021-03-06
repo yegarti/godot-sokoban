@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/Crate.gd"
 }, {
-"base": "MarginContainer",
-"class": "CustomButton",
-"language": "GDScript",
-"path": "res://scenes/ui/CustomButton.gd"
-}, {
 "base": "Reference",
 "class": "Helper",
 "language": "GDScript",
@@ -53,7 +48,6 @@ _global_script_class_icons={
 "BlockSprite": "",
 "Character": "",
 "Crate": "",
-"CustomButton": "",
 "Helper": "",
 "LevelInfo": "",
 "LevelPackInfo": "",
