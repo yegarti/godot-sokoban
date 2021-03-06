@@ -44,13 +44,18 @@ align = 1
 [node name="LevelsContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 76.0
 margin_right = 1206.0
-margin_bottom = 126.0
+margin_bottom = 728.0
+size_flags_vertical = 3
 custom_constants/margin_top = 50
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/LevelsContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/LevelsContainer"]
 margin_top = 50.0
 margin_right = 1206.0
-margin_bottom = 50.0
+margin_bottom = 652.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/LevelsContainer/ScrollContainer"]
 custom_constants/vseparation = 11
 custom_constants/hseparation = 11
 columns = 17

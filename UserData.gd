@@ -37,7 +37,7 @@ func _verify_exists(pack_id, level_id):
 	if not level_save_data.has(pack_id):
 		level_save_data[pack_id] = {}
 	if not level_save_data[pack_id].has(str(level_id)):
-		level_save_data[pack_id][str(level_id)] = {"status": _status_to_str[LevelStatus.New], "score": 9999}
+		level_save_data[pack_id][str(level_id)] = {"status": _status_to_str[LevelStatus.New], "score": 99999}
 
 func set_level_data(pack_id, level_id, status = null, score = null):
 	_verify_exists(pack_id, level_id)

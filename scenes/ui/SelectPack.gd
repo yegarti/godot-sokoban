@@ -22,13 +22,14 @@ func _find_all_level_packs():
 	file.close()
 	assert(true, typeof(levels_data.result) == TYPE_ARRAY)
 	for level_pack in levels_data.result:
-		var level_pack_info = LevelPackInfo.new(
-			level_pack["id"],
-			level_pack["name"],
-			Globals.LEVELS_PATH + "/" + level_pack["file_name"],
-			level_pack.get("author", ""),
-			level_pack["number_of_levels"])
-		level_packs[level_pack_info.name] = level_pack_info
+		if level_pack['enabled']:
+			var level_pack_info = LevelPackInfo.new(
+				level_pack["id"],
+				level_pack["name"],
+				Globals.LEVELS_PATH + "/" + level_pack["file_name"],
+				level_pack.get("author", ""),
+				level_pack["number_of_levels"])
+			level_packs[level_pack_info.name] = level_pack_info
 
 func add_level_pack(level_pack_info):
 	Logger.debug("Adding level pack '%s' with %d levels at %s" % 

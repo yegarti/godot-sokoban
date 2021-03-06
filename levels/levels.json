@@ -5,7 +5,7 @@
 		"file_name": "basics.txt",
 		"author": "Yehuda Garti, yeudag@gmail.com",
 		"number_of_levels": 3,
-		"enabled": true
+		"enabled": false
 	},
 	{
 		"name": "Original + Extra",
@@ -23,7 +23,23 @@
 		"enabled": true
 	},
 	{
-		"name": "Micro Cosmos",
+		"name": "Mas Sasquatch",
+		"id": "mas_sasquatch",
+		"file_name": "massasquatch.txt",
+		"author": "David Skinner, sasquatch@bentonrea.com",
+		"number_of_levels": 50,
+		"enabled": true
+	},
+	{
+		"name": "Microban",
+		"id": "microban",
+		"file_name": "microban.txt",
+		"author": "David Skinner, sasquatch@bentonrea.com",
+		"number_of_levels": 155,
+		"enabled": true
+	},
+	{
+		"name": "Microcosmos",
 		"id": "micro_cosmos",
 		"file_name": "micro_cosmos.txt",
 		"author": "Aymeric du Peloux, aymeric.dupeloux@smile.fr",
@@ -31,9 +47,17 @@
 		"enabled": true
 	},
 	{
-		"name": "Mini Cosmos",
+		"name": "Minicosmos",
 		"id": "mini_cosmos",
 		"file_name": "mini_cosmos.txt",
+		"author": "Aymeric du Peloux, aymeric.dupeloux@smile.fr",
+		"number_of_levels": 40,
+		"enabled": true
+	},
+	{
+		"name": "Nabokosmos",
+		"id": "nabo_kosmos",
+		"file_name": "nabokosmos.txt",
 		"author": "Aymeric du Peloux, aymeric.dupeloux@smile.fr",
 		"number_of_levels": 40,
 		"enabled": true
