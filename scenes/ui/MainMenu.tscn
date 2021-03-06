@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://styles/style_button_hover.tres" type="StyleBox" id=1]
 [ext_resource path="res://styles/font_main_title.tres" type="DynamicFont" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://styles/style_button_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://styles/font_button.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/ui/MainMenu.gd" type="Script" id=6]
+[ext_resource path="res://assets/fonts/fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/ui/Credits.tscn" type="PackedScene" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 7 )
 
 [node name="MarginContainer" type="MarginContainer"]
 anchor_right = 1.0
@@ -35,23 +40,31 @@ custom_constants/shadow_offset_y = 2
 text = "Sokoban"
 align = 1
 
-[node name="MenuContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 84.0
 margin_right = 1286.0
-margin_bottom = 444.0
-custom_constants/margin_right = 510
-custom_constants/margin_top = 100
-custom_constants/margin_left = 510
+margin_bottom = 464.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MenuContainer"]
-margin_left = 510.0
-margin_top = 100.0
-margin_right = 776.0
-margin_bottom = 360.0
+[node name="MenuContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 641.0
+margin_bottom = 380.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 150
+custom_constants/margin_top = 120
+custom_constants/margin_left = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MenuContainer"]
+margin_left = 150.0
+margin_top = 120.0
+margin_right = 491.0
+margin_bottom = 380.0
 custom_constants/separation = 10
 
-[node name="Play" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
-margin_right = 266.0
+[node name="Play" type="Button" parent="VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer"]
+margin_right = 341.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
@@ -62,9 +75,9 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "Play"
 
-[node name="Help" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
+[node name="Help" type="Button" parent="VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer"]
 margin_top = 90.0
-margin_right = 266.0
+margin_right = 341.0
 margin_bottom = 170.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
@@ -75,9 +88,9 @@ custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "Help"
 
-[node name="Exit" type="Button" parent="VBoxContainer/MenuContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer"]
 margin_top = 180.0
-margin_right = 266.0
+margin_right = 341.0
 margin_bottom = 260.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_horizontal = 3
@@ -87,6 +100,25 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/normal = ExtResource( 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "Exit"
-[connection signal="pressed" from="VBoxContainer/MenuContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="VBoxContainer/MenuContainer/VBoxContainer/Help" to="." method="_on_Help_pressed"]
-[connection signal="pressed" from="VBoxContainer/MenuContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+
+[node name="Credits" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 645.0
+margin_right = 1286.0
+margin_bottom = 380.0
+size_flags_horizontal = 3
+custom_constants/margin_top = 120
+
+[node name="VersionLabel" type="Label" parent="VBoxContainer"]
+margin_top = 468.0
+margin_right = 1286.0
+margin_bottom = 688.0
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "v0"
+align = 2
+valign = 2
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer/Help" to="." method="_on_Help_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

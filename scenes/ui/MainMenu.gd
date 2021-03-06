@@ -2,8 +2,15 @@ extends MarginContainer
 
 signal change_scene(scene_type)
 
+var _version
+
 func _ready():
-	$VBoxContainer/MenuContainer/VBoxContainer/Play.grab_focus()
+	var file = File.new()
+	file.open("version.txt", File.READ)
+	_version = file.get_line()
+	file.close()
+	$VBoxContainer/VersionLabel.text = 'v' + _version
+	$VBoxContainer/HBoxContainer/MenuContainer/VBoxContainer/Play.grab_focus()
 
 
 func _on_Exit_pressed():
