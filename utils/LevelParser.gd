@@ -48,22 +48,18 @@ func _find_ground_tiles(raw_level: Array):
 	# use flood fill algorithm to find all tiles within the level and
 	# mark them using the 'ground' character
 
-	# find player to use as start for flood fill
-	var player_pos = null
+	# place all positions with create or player in stack
 	var y = 0
+	var stack = []
 	for row in raw_level:
 		var x = 0
-		if player_pos:
-			break
 		for tile in row:
-			if tile == PLAYER or tile == PLAYER_ON_GOAL:
-				player_pos = Vector2(x, y)
-				break
+			if tile == PLAYER or tile == PLAYER_ON_GOAL or tile == CRATE or tile == CRATE_ON_GOAL:
+				stack.append(Vector2(x, y))
 			x += 1
 		y += 1
 
 	# flood fill to find all ground tiles
-	var stack = [player_pos]
 	var ground_positions = PoolVector2Array()
 	while not stack.empty():
 		var tile_pos = stack.pop_back()
