@@ -6,7 +6,7 @@ const LVL_DONE_MESSAGE_VISIBLE_TIME = 1
 const CONTINUES_MOVEMENT_DELAY = 0.2
 const LEVELS_PATH = "res://levels/"
 const LEVELS_METADATA_JSON = "res://levels/levels.json"
-const DEFAULT_LOG_LEVEL = Logger.DEBUG
+const DEFAULT_LOG_LEVEL = Logger.INFO
 
 enum SceneType {SelectPack, Help, Quit, Main, SelectLevel, Game}
 
