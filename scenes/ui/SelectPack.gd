@@ -26,7 +26,7 @@ func _find_all_level_packs():
 			var level_pack_info = LevelPackInfo.new(
 				level_pack["id"],
 				level_pack["name"],
-				Globals.LEVELS_PATH + "/" + level_pack["file_name"],
+				Globals.LEVELS_PATH + level_pack["file_name"],
 				level_pack.get("author", ""),
 				level_pack["number_of_levels"])
 			level_packs[level_pack_info.name] = level_pack_info

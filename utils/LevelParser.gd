@@ -1,6 +1,8 @@
 var levels = []
 var number_of_levels
 
+const TAG = "LevelParser"
+
 const PLAYER = '@'
 const PLAYER_ON_GOAL = '+'
 const CRATE = '$'
@@ -14,8 +16,8 @@ func get_level(level_id: int):
 
 func _init():
 	var file = File.new()
+	Logger.debug("Opening file: %s" % Globals.current_level_pack.path, TAG)
 	file.open(Globals.current_level_pack.path, File.READ)
-	var lines = []
 	var raw_levels = []
 	while not file.eof_reached():
 		var line = file.get_line()
@@ -37,9 +39,9 @@ func _init():
 		levels.append(level)
 	number_of_levels = len(levels)
 
-func _parse_levels(levels: Array):
+func _parse_levels(raw_levels: Array):
 	var game_levels = []
-	for raw_level in levels:
+	for raw_level in raw_levels:
 		var level = _parse_level(raw_level)
 		game_levels.append(level)
 	return game_levels

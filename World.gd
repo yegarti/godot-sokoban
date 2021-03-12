@@ -33,8 +33,6 @@ func _load_scene(scene_type):
 	current_scene_type = scene_type
 
 func _unhandled_input(event):
-	if event.is_action_pressed("quit"):
-		queue_free()
 	if event.is_action_pressed("ui_back"):
 		back()
 
