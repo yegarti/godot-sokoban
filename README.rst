@@ -10,6 +10,6 @@ Sokoban game made in Godot using GDScript
 
 Credits
 -------
-`Godot Engine <godotengine.org/>`_
+`Godot Engine <https://godotengine.org/>`_
 
 Assets by `Kenney <https://kenney.nl/>`_
