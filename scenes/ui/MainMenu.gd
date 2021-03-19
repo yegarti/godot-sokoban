@@ -6,7 +6,7 @@ var _version
 
 func _ready():
 	var file = File.new()
-	file.open("version.txt", File.READ)
+	file.open("res://version.txt", File.READ)
 	_version = file.get_line()
 	file.close()
 	$VBoxContainer/VersionLabel.text = 'v' + _version
