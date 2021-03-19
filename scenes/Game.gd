@@ -36,6 +36,7 @@ func _on_Level_completed():
 		UserData.save_game()
 
 func _load_new_level(lvl_id: int):
+	Globals.current_level_id = lvl_id
 	self.level_id = lvl_id
 	level_data = UserData.get_level_data(Globals.current_level_pack.id, level_id)
 	$GUI.show()

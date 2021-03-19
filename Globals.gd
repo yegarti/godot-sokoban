@@ -10,8 +10,8 @@ const DEFAULT_LOG_LEVEL = Logger.DEBUG
 
 enum SceneType {SelectPack, Help, Quit, Main, SelectLevel, Game}
 
-var current_level_pack
-var current_level_id = 1
+var current_level_pack: LevelPackInfo
+var current_level_id := 0
 
 var _button_font_style = preload("res://styles/font_button.tres")
 var _button_styles = {

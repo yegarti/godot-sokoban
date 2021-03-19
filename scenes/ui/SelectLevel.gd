@@ -25,8 +25,8 @@ func _ready():
 			$VBoxContainer/AuthorLabel.text = "  "
 		for i in range(Globals.current_level_pack.number_of_levels):
 			_create_new_button(i)
-	if levels_container.get_child_count() > 0:
-		levels_container.get_child(0).grab_focus()
+
+	levels_container.get_child(Globals.current_level_id).grab_focus()
 
 func _create_new_button(lvl_id):
 	var button = Button.new()

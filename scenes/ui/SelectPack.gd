@@ -11,7 +11,11 @@ func _ready():
 	_find_all_level_packs()
 	for level_pack_info in level_packs.values():
 		add_level_pack(level_pack_info)
-	if level_container.get_child_count() > 0:
+
+	Globals.current_level_id = 0
+	if Globals.current_level_pack:
+		level_container.get_node(Globals.current_level_pack.id).grab_focus()
+	else:
 		level_container.get_child(0).grab_focus()
 
 func _find_all_level_packs():
@@ -44,10 +48,11 @@ func _load_level_action(level_pack_info):
 
 func _create_new_button(pack_info: LevelPackInfo):
 	var button = Button.new()
+	button.name = pack_info.id
 
 	Globals.set_button_style(button, "blue")
 
 	button.rect_min_size = _button_size
 	button.text = pack_info.name
 	button.connect("pressed", self, "_load_level_action", [pack_info])
-	level_container.add_child(button)
+	level_container.add_child(button, true)
